@@ -53,6 +53,15 @@
 	<div class="layui-container">
 		<div class="layui-row layui-col-space20">
 			<div class="layui-col-md8">
+             <div class="layui-tab layui-tab-brief">
+               <ul class="layui-tab-title">
+               <li>技术分享</li>
+               <li>项目展示</span></li>
+               <li>大事件</li>
+                  </ul>
+                 <div class="layui-tab-content"></div>
+                 </div>
+
 				<div class="layui-row">
 					<div class="layui-col-md12">
 						<div class="layui-carousel" id="carousel">
