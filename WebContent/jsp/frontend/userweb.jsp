@@ -3,7 +3,17 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	HttpSession a = request.getSession();
+	String username = (String)session.getAttribute("username");
+	String fill = "";
+	String href = "";
+	if(username == null){
+		username = "请登录";
+		href = "/ssm";
+		}
+	else{
+		href="javascript:;";
+		fill = "<dl class='layui-nav-child'><dd><a href='javascript:;'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+	}
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -21,23 +31,21 @@
 	<base href=" <%=basePath%>">
 	<link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
+	<script src="js/jquery.session.js"></script>
 </head>
 <body>
 	<header class="layui-bg-cyan">
 		<nav class="layui-container">
 			<ul class="layui-nav layui-bg-cyan">
- 			    	    <li class="layui-nav-item">
+ 			    	    <li style="margin-left:-20px" class="layui-nav-item">
 					    	<a href="frontend">TRY1T BLOG</a>
 					  	</li>
 					  	<li class="layui-nav-item layui-this">
 					    	<a href="">个人主页</a>
 					  	</li>
-  <li style=" float:right;" class="layui-nav-item" lay-unselect="">
-    <a href="javascript:;"><img src="images/default.jpg" class="layui-nav-img">我</a>
-    <dl class="layui-nav-child">
-      <dd><a href="javascript:;">账号信息</a></dd>
-      <dd><a id="logout" >退出</a></dd>
-    </dl>
+  <li style="float:right;margin-right:-20px" class="layui-nav-item">
+    <a href="<%=href%>"><img src="images/default.jpg" class="layui-nav-img"><%=username%></a>
+<%=fill%>
   </li>
 </ul>
 		</nav>
@@ -45,7 +53,16 @@
 	<div class="layui-container">
 		<div class="layui-row layui-col-space20">
 			<div class="layui-col-md8">
-				<div class="layui-row">			
+				<div class="layui-row">
+					<div class="layui-col-md12">
+						<div class="layui-carousel" id="carousel">
+					  		<div carousel-item>
+							    <div><img src="images/1.jpg" alt=""></div>
+							    <div><img src="images/2.jpg" alt=""></div>
+					  		</div>
+						</div>
+					</div>
+					
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
 						<div class="main zdbox">
@@ -169,7 +186,6 @@
 	        </div>
 		</div>
 	</div>
-
 	<!-- 尾部 -->
 	<div class="footer"></div>
 	<footer class="layui-bg-cyan">
@@ -183,6 +199,9 @@
 <script src="lib/layui/layui.all.js"></script>
 
 <script>
+layui.use([ 'form', 'layer' ], function() {
+	$ = layui.jquery;
+	var layer = layui.layer;
 	layui.carousel.render({
 	    elem: '#carousel'
 	    ,width: '100%' //设置容器宽度
@@ -193,6 +212,34 @@
 	    elem: 'pages' //注意，这里的 test1 是 ID，不用加 # 号
 	    ,count: 123 //数据总数，从服务端得到
   	});
-
+  	
+  	$( "#logout" ).click(function() {
+  	  layer.confirm("确定退出吗", {
+			    yes:function(){
+					$.ajax({
+						type : "POST",
+						contentType : "application/json",
+						url : "/ssm/logout",
+						data : "",
+						dataType : "json",
+						success : function(data) {
+							var obj = JSON.parse(data);
+							if (obj.result == "success") {	
+								window.location.reload();
+							} else if (obj.result == "fail") {
+								layer.alert("error-debug1")
+							}
+						},
+						error : function(e) {
+							layer.alert("error-debug2");
+							window.location.href = "/ssm";
+						}
+					});
+			    }
+			});
+  	  
+  	});
+});
+  	
 </script>
 </html>
