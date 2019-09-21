@@ -8,11 +8,10 @@
 <title>TRY1T</title>
 <link rel="stylesheet" type="text/css" href="css/login.css">
 <script src="lib/layui/layui.js" charset="utf-8"></script>
-
 </head>
 <body>
 	<p class="center">测试登录用户名为：admin，密码为admin， 其余用户自行登录</p>
-	<div style="width:350px;" id="wrapper" class="login-page">
+	<div style="width:350px" id="wrapper" class="login-page">
 		<div id="login_form" class="form">
 			<form class="login-form">
 				<h2>TRY1T Blog 登录</h2>

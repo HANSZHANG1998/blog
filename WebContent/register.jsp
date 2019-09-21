@@ -11,14 +11,14 @@
 </head>
 <body>
 	<p class="center">测试登录用户名为：admin，密码为admin， 其余用户自行登录</p>
-	<div style="width:350px;" id="wrapper" class="login-page">
+	<div style="width:350px" id="wrapper" class="login-page">
 		<div id="login_form" class="form">
 			<form class="login-form">
 				<h2>注册</h2>
-				<input type="text" placeholder="用户名" id="username" /> <input
-					type="password" placeholder="密码" id="password" /> <input
-					type="text" placeholder="email" id="email" />
-			</form>
+				<input type="text" placeholder="用户名" id="username" /> 
+				<input type="password" placeholder="密码" id="password" /> 
+				<input type="text" placeholder="email" id="email" />
+				</form>
 			<button id="create">注 册</button>
 			<p class="message">
 				已经有了一个账户? <a href="login.jsp">立刻登录</a>

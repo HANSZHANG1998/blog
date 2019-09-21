@@ -31,7 +31,7 @@
 	<base href=" <%=basePath%>">
 	<link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
-	<script src="js/jquery.session.js"></script> 
+	<script src="js/jquery.session.js"></script>
 </head>
 <body>
 	<header class="layui-bg-cyan">
@@ -212,15 +212,17 @@ layui.use([ 'form', 'layer' ], function() {
 	    elem: 'pages' //注意，这里的 test1 是 ID，不用加 # 号
 	    ,count: 123 //数据总数，从服务端得到
   	});
+  	
+  	$( "#logout" ).click(function() {
+  	  layer.confirm("确定退出吗", {
+			    yes:function(){
+			    	$.session.remove('key');
+			    	window.location.reload();
+			    }
+			});
+  	  
+  	});
 });
-$( "#logout" ).click(function() {
-	  layer.confirm("确定退出吗", {
-		    yes:function(){
-		    //
-		    	window.location.reload();
-		    }
-		});
-	  
-	});
+  	
 </script>
 </html>

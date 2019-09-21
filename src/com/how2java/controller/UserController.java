@@ -56,7 +56,7 @@ public class UserController {
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		List<String> cs = userService.getByUsername(username);
 		if (cs.size() == 0) {
-			json = "{\"result\":\"fail1\"}";
+			json = "{\"result\":\"fail\"}";
 			json = gson.toJson(json);
 			out.write(json);// invalid password
 		} else {

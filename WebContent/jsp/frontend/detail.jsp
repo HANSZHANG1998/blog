@@ -1,19 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-		+ path + "/";
-String username = (String)session.getAttribute("username");
-String fill = "";
-String href = "";
-if(username == null){
-	username = "请登录";
-	href = "/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	String username = (String)session.getAttribute("username");
+	String fill = "";
+	String href = "";
+	if(username == null){
+		username = "请登录";
+		href = "/ssm";
+		}
+	else{
+		href="javascript:;";
+		fill = "<dl class='layui-nav-child'><dd><a href='javascript:;'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
 	}
-else{
-	href="javascript:;";
-	fill = "<dl class='layui-nav-child'><dd><a href='javascript:;'>账号信息</a></dd><dd><a href='javascript:;'>退出</a></dd></dl>";
-}
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -38,14 +38,14 @@ else{
 <header class="layui-bg-cyan">
 		<nav class="layui-container">
 			<ul class="layui-nav layui-bg-cyan">
- 			    	    <li class="layui-nav-item layui-this">
+ 			    	    <li style="margin-left:-20px" class="layui-nav-item layui-this">
 					    	<a href="frontend">TRY1T BLOG</a>
 					  	</li>
 					  	<li class="layui-nav-item">
 					    	<a href="">个人主页</a>
 					  	</li>
-  <li style=" float:right;" class="layui-nav-item">
-    <a href=""><img src="images/default.jpg" class="layui-nav-img"><%=username%></a>
+  <li style="float:right;margin-right:-20px" class="layui-nav-item">
+    <a href="<%=href%>"><img src="images/default.jpg" class="layui-nav-img"><%=username%></a>
 <%=fill%>
   </li>
 </ul>
@@ -224,4 +224,13 @@ else{
 	</footer>
 </body>
 <script src="lib/layui/layui.all.js"></script>
+<script>  	$( "#logout" ).click(function() {
+	  layer.confirm("确定退出吗", {
+		    yes:function(){
+		    	$.session.remove('key');
+		    	window.location.reload();
+		    }
+		});
+	  
+	});</script>
 </html>
