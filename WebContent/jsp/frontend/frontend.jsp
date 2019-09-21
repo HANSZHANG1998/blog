@@ -216,8 +216,25 @@ layui.use([ 'form', 'layer' ], function() {
   	$( "#logout" ).click(function() {
   	  layer.confirm("确定退出吗", {
 			    yes:function(){
-			    	$.session.remove('key');
-			    	window.location.reload();
+					$.ajax({
+						type : "POST",
+						contentType : "application/json",
+						url : "/ssm/logout",
+						data : "",
+						dataType : "json",
+						success : function(data) {
+							var obj = JSON.parse(data);
+							if (obj.result == "success") {	
+								window.location.reload();
+							} else if (obj.result == "fail") {
+								layer.alert("error-debug1")
+							}
+						},
+						error : function(e) {
+							layer.alert("error-debug2");
+							window.location.href = "/ssm";
+						}
+					});
 			    }
 			});
   	  
