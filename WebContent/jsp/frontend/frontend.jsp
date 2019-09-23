@@ -135,11 +135,10 @@
 						<div class="layui-card">
 						  	<div class="layui-card-header">
 								<span class="layui-breadcrumb" lay-separator="|">
-									<a href="javascript:;">站点统计</a>
-									<a href="javascript:;">联系站长</a>
+									<a href="javascript:;">站点详情</a>
 								</span>
 						  	</div>
-						  	<div class="layui-card-body" id="stat" style="display: none;">
+						  	<div class="layui-card-body" id="stat">
 						  		<table class="layui-table">
 								  	<colgroup>
 								    	<col width="120">
@@ -148,37 +147,15 @@
 								  	<tbody>
 								    	<tr>
 								      		<td>运行时间：</td>
-								      		<td>0 天</td>
+								      		<td>30 天</td>
 								    	</tr>
 								    	<tr>
 								      		<td>发表文章：</td>
-								      		<td>0 篇</td>
+								      		<td>${articlecount} 篇</td>
 								    	</tr>
 								    	<tr>
 								      		<td>注册用户：</td>
-								      		<td>0 人</td>
-								    	</tr>
-								  	</tbody>
-								</table>
-						  	</div>
-						  	<div class="layui-card-body" id="binfo">
-						  		<table class="layui-table">
-								  	<colgroup>
-								    	<col width="120">
-								    	<col width="230">
-								  	</colgroup>
-								  	<tbody>
-								    	<tr>
-								      		<td>QQ：</td>
-								      		<td>1185013588</td>
-								    	</tr>
-								    	<tr>
-								      		<td>Wechat：</td>
-								      		<td></td>
-								    	</tr>
-								    	<tr>
-								      		<td>qqGroup：</td>
-								      		<td></td>
+								      		<td>${usercount} 人</td>
 								    	</tr>
 								  	</tbody>
 								</table>
@@ -190,12 +167,12 @@
 						<div class="layui-card">
 						  	<div class="layui-card-header">
 								<span>
-									捐助本站
+									文章分类
 								</span>
 						  	</div>
 						  	<div class="layui-card-body" style="text-align: center;">
 						    	<br/>
-						    	<p>无论多少，都是心意!</p>
+						    	<p></p>
 						  	</div>
 						</div>
 					</div>

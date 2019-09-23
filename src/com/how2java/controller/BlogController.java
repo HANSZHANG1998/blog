@@ -13,8 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.how2java.pojo.Blog;
 import com.how2java.pojo.Tag;
+import com.how2java.pojo.User;
 import com.how2java.service.BlogService;
 import com.how2java.service.TagService;
+import com.how2java.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +36,8 @@ public class BlogController {
 	BlogService blogService;
 	@Autowired
 	TagService tagService;
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping("blog-add")
 	public void blogadd(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -206,6 +210,7 @@ public class BlogController {
 		}
 		ModelAndView mav = new ModelAndView();
 		List<Blog> cs = blogService.list();
+		List<User> cs2 = userService.list();
 		List<Blog> newblog;
 		int total = cs.size() / 10;
 		if (total * 10 != cs.size()) {
@@ -219,6 +224,8 @@ public class BlogController {
 		mav.addObject("cs", newblog);
 		mav.setViewName("frontend/frontend");
 		mav.addObject("count", cs.size());
+		mav.addObject("articlecount", cs.size());
+		mav.addObject("usercount", cs2.size());
 		HttpSession session = request.getSession();
 		session.setAttribute("pagenum", current);
 		session.setAttribute("count", cs.size());
