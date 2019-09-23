@@ -215,14 +215,14 @@ layui.use([ 'form', 'layer' ], function() {
 						success : function(data) {
 							var obj = JSON.parse(data);
 							if (obj.result == "success") {	
-								window.location.reload();
+								window.location.href = "/ssm/frontend";
 							} else if (obj.result == "fail") {
 								layer.alert("error-debug1")
 							}
 						},
 						error : function(e) {
 							layer.alert("error-debug2");
-							window.location.href = "/ssm";
+							window.location.href = "/ssm/frontend";
 						}
 					});
 			    }

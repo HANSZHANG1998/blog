@@ -1,8 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String username = (String)session.getAttribute("username");
 	String fill = "";
 	String href = "";
@@ -33,7 +32,7 @@
 	<base href=" <%=basePath%>">
 	<link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
-	<script src="js/jquery.session.js"></script>
+	<link rel="stylesheet" href="css/xadmin.css">
 </head>
 <body>
 	<header class="layui-bg-cyan">
@@ -125,8 +124,18 @@
 						</div>
 					</div>
 </c:forEach>
-					<div class="layui-col-md12 margin20"></div>
-					<div class="layui-col-md12" id="pages"></div>
+					
+					<div class="layui-col-md12 margin20 page">
+			<div>
+				<a class="prev" href="">&lt;&lt;</a> 
+				<a class="num" style="" href="">1</a> 
+			    <span class="current" style="background-color:#009688">2</span> 
+			    <a class="num" href="">3</a> 
+				<a class="next" href="">&gt;&gt;</a>
+			</div>
+		</div>
+		<div class="layui-col-md12 margin20"></div>
+		
 				</div>
 	        </div>
 	        <div class="layui-col-md4">
@@ -167,6 +176,20 @@
 						<div class="layui-card">
 						  	<div class="layui-card-header">
 								<span>
+									搜索
+								</span>
+						  	</div>
+						  	<div class="layui-card-body" style="text-align: center;">
+               <input style="width:60%;display:inline" type="text" id="search" name="search" placeholder="请输入查询内容" autocomplete="off" class="layui-input">&nbsp<button style="display:inline;margin-top:-4px" class="layui-btn" id="searchBtn" >搜索</button>
+                
+						  	</div>
+						</div>
+					</div>
+					<div class="layui-col-md12 margin20"></div>
+					<div class="layui-col-md12">
+						<div class="layui-card">
+						  	<div class="layui-card-header">
+								<span>
 									文章分类
 								</span>
 						  	</div>
@@ -196,6 +219,7 @@
 layui.use([ 'form', 'layer' ], function() {
 	$ = layui.jquery;
 	var layer = layui.layer;
+	var cuurentpage;
 	layui.carousel.render({
 	    elem: '#carousel'
 	    ,width: '100%' //设置容器宽度
@@ -204,7 +228,13 @@ layui.use([ 'form', 'layer' ], function() {
   	});
   	layui.laypage.render({
 	    elem: 'pages' //注意，这里的 test1 是 ID，不用加 # 号
-	    ,count: 123 //数据总数，从服务端得到
+	    ,count: 100 //数据总数，从服务端得到
+  	    ,limit: 10//每页个数
+  	    ,groups: 3//button个数
+  	});
+  	
+  	$( "#searchBtn" ).click(function() {
+  		window.location.href = "search?content=" + $("#search").val();
   	});
   	
   	$( "#logout" ).click(function() {
@@ -226,7 +256,7 @@ layui.use([ 'form', 'layer' ], function() {
 						},
 						error : function(e) {
 							layer.alert("error-debug2");
-							window.location.href = "/ssm";
+							window.location.href = "/ssm/frontend";
 						}
 					});
 			    }

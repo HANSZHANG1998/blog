@@ -202,33 +202,31 @@ public class BlogController {
 	
 	@RequestMapping("frontend")
 	public ModelAndView frontend(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int current;
-		if (request.getParameter("pagenum") == null) {
-			current = 1;
-		} else {
-			current = Integer.parseInt(request.getParameter("pagenum"));
-		}
 		ModelAndView mav = new ModelAndView();
+		String current  = (String) request.getAttribute("current");
+		int currentpage = 0;
+		if(current == null) {
+			currentpage = 1;
+		}else {
+			currentpage = Integer.parseInt(current);
+		}
+		int pages;
 		List<Blog> cs = blogService.list();
+		if(cs.isEmpty()) {
+			pages = 1;
+		}else {
+		pages = (int) Math.ceil(cs.size()/10);
+		}
+		if(currentpage == pages){
+			cs.subList((currentpage-1)*10, cs.size());
+		}else {
+			cs.subList((currentpage-1)*10, currentpage*10-1);
+		}
 		List<User> cs2 = userService.list();
-		List<Blog> newblog;
-		int total = cs.size() / 10;
-		if (total * 10 != cs.size()) {
-			total = total + 1;
-		}
-		if (current != total) {
-			newblog = cs.subList((current - 1) * 10, (current) * 10);
-		} else {
-			newblog = cs.subList((current - 1) * 10, cs.size());
-		}
-		mav.addObject("cs", newblog);
-		mav.setViewName("frontend/frontend");
-		mav.addObject("count", cs.size());
 		mav.addObject("articlecount", cs.size());
 		mav.addObject("usercount", cs2.size());
-		HttpSession session = request.getSession();
-		session.setAttribute("pagenum", current);
-		session.setAttribute("count", cs.size());
+		mav.addObject("cs", cs);
+		mav.setViewName("frontend/frontend");
 		return mav;
 	}
 	
@@ -257,7 +255,6 @@ public class BlogController {
 		mav.addObject("cs", newblog);
 		mav.setViewName("frontend/userweb");
 		mav.addObject("count", cs.size());
-		
 		session.setAttribute("pagenum", current);
 		session.setAttribute("count", cs.size());
 		return mav;
