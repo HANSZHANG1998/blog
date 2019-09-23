@@ -3,18 +3,30 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 	String username = (String)session.getAttribute("username");
+	String curr = request.getAttribute("current").toString();
+	int current = Integer.parseInt(curr);
+	int pages = (int)request.getAttribute("pages");
 	String fill = "";
 	String href = "";
 	String display = "";
+	String display1 = "";
+	String display2 = "";
 	if(username == null){
 		username = "请登录";
 		href = "/ssm";
-		display = "display:none";
+		display="display:none";
 		}
 	else{
 		href="javascript:;";
 		fill = "<dl class='layui-nav-child'><dd><a href='javascript:;'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
 	}
+	if(current == 1){
+		display1 = "display:none";
+	}
+	if(current == pages){
+		display2 = "display:none";
+	}
+	
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -73,7 +85,6 @@
                <li style="width:18%">项目展示</span></li>
                <li style="width:18%">大事件</li>
                <li style="width:18%">心情动态</li>
-               
                   </ul>
                  <div class="layui-tab-content"></div>
                  </div>
@@ -127,11 +138,11 @@
 					
 					<div class="layui-col-md12 margin20 page">
 			<div>
-				<a class="prev" href="">&lt;&lt;</a> 
-				<a class="num" style="" href="">1</a> 
-			    <span class="current" style="background-color:#009688">2</span> 
-			    <a class="num" href="">3</a> 
-				<a class="next" href="">&gt;&gt;</a>
+				<a class="prev" href="/ssm/frontend?current=1">&lt;&lt;</a> 
+				<a style="<%=display1%>" class="num" href="/ssm/frontend?current=<%=current-1%>"><%=current-1%></a> 
+			    <span class="current" style="background-color:#009688"><%=current%></span> 
+			    <a style="<%=display2%>" class="num" href="/ssm/frontend?current=<%=current+1%>"><%=current+1%></a> 
+				<a class="next" href="/ssm/frontend?current=<%=pages%>">&gt;&gt;</a>
 			</div>
 		</div>
 		<div class="layui-col-md12 margin20"></div>
@@ -195,7 +206,12 @@
 						  	</div>
 						  	<div class="layui-card-body" style="text-align: center;">
 						    	<br/>
-						    	<p></p>
+						    	               <ul class="">
+               <li style="width:18%">技术分享</li>
+               <li style="width:18%">项目展示</li>
+               <li style="width:18%">大事件</li>
+               <li style="width:18%">心情动态</li>
+                  </ul>
 						  	</div>
 						</div>
 					</div>

@@ -215,7 +215,11 @@ public class BlogController {
 		if(cs.isEmpty()) {
 			pages = 1;
 		}else {
-		pages = (int) Math.ceil(cs.size()/10);
+			if(cs.size()%10 != 0) {
+		pages = (cs.size()/10) + 1;
+		}else {
+			pages = cs.size()/10;
+		}
 		}
 		if(currentpage == pages){
 			cs.subList((currentpage-1)*10, cs.size());
@@ -227,6 +231,8 @@ public class BlogController {
 		mav.addObject("usercount", cs2.size());
 		mav.addObject("cs", cs);
 		mav.setViewName("frontend/frontend");
+		request.setAttribute("current", currentpage);
+		request.setAttribute("pages", pages);
 		return mav;
 	}
 	
