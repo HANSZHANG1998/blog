@@ -16,6 +16,10 @@
 	        select * from  blog  where id= #{id}    
 	    </select>
 	    
+	    <select id="getBlogByUsername" parameterType="String" resultType="Blog">
+	        select * from  blog  where username= #{username}    
+	    </select>
+	    
 	    <select id="getByUsername" parameterType="String" resultType="String">
 	        select password from  blog  where username= #{username}    
 	    </select>

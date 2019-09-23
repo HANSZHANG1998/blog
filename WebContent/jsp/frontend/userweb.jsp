@@ -41,7 +41,7 @@
 					    	<a href="frontend">TRY1T BLOG</a>
 					  	</li>
 					  	<li class="layui-nav-item layui-this">
-					    	<a href="">个人主页</a>
+					    	<a href="userweb">个人主页</a>
 					  	</li>
   <li style="float:right;margin-right:-20px" class="layui-nav-item">
     <a href="<%=href%>"><img src="images/default.jpg" class="layui-nav-img"><%=username%></a>
@@ -54,16 +54,6 @@
 		<div class="layui-row layui-col-space20">
 			<div class="layui-col-md8">
 				<div class="layui-row">
-					<div class="layui-col-md12">
-						<div class="layui-carousel" id="carousel">
-					  		<div carousel-item>
-							    <div><img src="images/1.jpg" alt=""></div>
-							    <div><img src="images/2.jpg" alt=""></div>
-					  		</div>
-						</div>
-					</div>
-					
-					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
 						<div class="main zdbox">
 							<div class="subject"><b>[置顶]</b><a href="">${c.title}</a><em>${c.date}发布</em></div>

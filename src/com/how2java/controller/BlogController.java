@@ -225,6 +225,37 @@ public class BlogController {
 		return mav;
 	}
 	
+	@RequestMapping("userweb")
+	public ModelAndView userweb(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		int current;
+		if (request.getParameter("pagenum") == null) {
+			current = 1;
+		} else {
+			current = Integer.parseInt(request.getParameter("pagenum"));
+		}
+		ModelAndView mav = new ModelAndView();
+		List<Blog> cs = blogService.getBlogByUsername(username);
+		List<Blog> newblog;
+		int total = cs.size() / 10;
+		if (total * 10 != cs.size()) {
+			total = total + 1;
+		}
+		if (current != total) {
+			newblog = cs.subList((current - 1) * 10, (current) * 10);
+		} else {
+			newblog = cs.subList((current - 1) * 10, cs.size());
+		}
+		mav.addObject("cs", newblog);
+		mav.setViewName("frontend/userweb");
+		mav.addObject("count", cs.size());
+		
+		session.setAttribute("pagenum", current);
+		session.setAttribute("count", cs.size());
+		return mav;
+	}
+	
 	@RequestMapping("detail")
 	public ModelAndView detail(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

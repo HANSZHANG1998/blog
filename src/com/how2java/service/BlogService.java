@@ -11,4 +11,5 @@ public interface BlogService {
 	public void delete(String id);
 	List<Blog> getById(String id);
 	List<Blog> getByUsername(String id);
+	List<Blog> getBlogByUsername(String id);
 }
