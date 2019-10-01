@@ -287,6 +287,6 @@ public class BlogController {
 		mav.setViewName("frontend/detail");
 		return mav;
 	}
-	}
+	
 	
 }
