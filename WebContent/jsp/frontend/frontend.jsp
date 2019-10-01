@@ -18,7 +18,7 @@
 		}
 	else{
 		href="javascript:;";
-		fill = "<dl class='layui-nav-child'><dd><a href='javascript:;'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+		fill = "<dl class='layui-nav-child'><dd><a href='jsp/account.jsp'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
 	}
 	if(current == 1){
 		display1 = "display:none";
@@ -51,15 +51,18 @@
 		<nav class="layui-container">
 			<ul class="layui-nav layui-bg-cyan">
  			    	    <li style="margin-left:-20px" class="layui-nav-item layui-this">
-					    	<a href="frontend">TRY1T</a>
+					    	<a href="frontend">BLOG</a>
 					  	</li>
 					  	<li style="<%=display%>"class="layui-nav-item">
 					    	<a href="userweb">个人主页</a>
 					  	</li>
 					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
 					  	<dl class="layui-nav-child">
-					  	<dd><a href="javascript:;">分类1</a></dd>
-					  	<dd></dd>
+					  	<dd><a href="search?category=0">分享</a></dd>
+					  	<dd><a href="search?category=1">新闻</a></dd>
+					  	<dd><a href="search?category=2">笔记</a></dd>
+					  	<dd><a href="search?category=3">展示</a></dd>
+					  	<dd><a href="search?category=4">大事件</a></dd>
 					  	</dl>
 					  	</li>
   <li style="float:right;margin-right:-20px" class="layui-nav-item">
@@ -69,11 +72,10 @@
 </ul>
 		</nav>
 	</header>
+	
 	<div class="layui-container">
 		<div class="layui-row layui-col-space20">
 			<div class="layui-col-md8">
-
-
 				<div class="layui-row">
 					<div class="layui-col-md12">
 						<div class="layui-carousel" id="carousel">
@@ -83,25 +85,7 @@
 					  		</div>
 						</div>
 					</div>
-                 			<div class="layui-col-md12 margin20"></div>
-                 	<div class="layui-col-md12">
-						<div class="main zdbox">
-								 <div class="layui-row">
-    <div class="layui-col-xs3">
-     <button type="button" class="layui-btn layui-btn-radius">默认按钮</button>
-    </div>
-    <div class="layui-col-xs3">
-     <button type="button" class="layui-btn layui-btn-radius">默认按钮</button>
-    </div>
-    <div class="layui-col-xs3">
-     <button type="button" class="layui-btn layui-btn-radius">默认按钮</button>
-    </div>
-    <div class="layui-col-xs3">
-      <button type="button" class="layui-btn layui-btn-radius">默认按钮</button>
-    </div>
-  </div>
-						</div>
-					</div>			
+
 				<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
 						<div class="main zdbox">
@@ -149,19 +133,18 @@
 </c:forEach>
 					
 					<div class="layui-col-md12 margin20 page">
-			<div>
+			
 				<a class="prev" href="/ssm/frontend?current=1">&lt;&lt;</a> 
 				<a style="<%=display1%>" class="num" href="/ssm/frontend?current=<%=current-1%>"><%=current-1%></a> 
 			    <span class="current" style="background-color:#009688"><%=current%></span> 
 			    <a style="<%=display2%>" class="num" href="/ssm/frontend?current=<%=current+1%>"><%=current+1%></a> 
 				<a class="next" href="/ssm/frontend?current=<%=pages%>">&gt;&gt;</a>
-			</div>
-		</div>
-		<div class="layui-col-md12 margin20"></div>
 		
+		</div>
+			<div class="layui-col-md12 margin20"></div>
 				</div>
 	        </div>
-	        <div class="layui-col-md4">
+	        <div style="margin-top:-10px" class="layui-col-md4">
 				<div class="layui-row">
 					<div class="layui-col-md12">
 						<div class="layui-card">
@@ -209,24 +192,6 @@
 						</div>
 					</div>
 					<div class="layui-col-md12 margin20"></div>
-					<div class="layui-col-md12">
-						<div class="layui-card">
-						  	<div class="layui-card-header">
-								<span>
-									文章分类
-								</span>
-						  	</div>
-						  	<div class="layui-card-body" style="text-align: center;">
-						    	<br/>
-						    	               <ul class="">
-               <li style="width:18%">技术分享</li>
-               <li style="width:18%">项目展示</li>
-               <li style="width:18%">大事件</li>
-               <li style="width:18%">心情动态</li>
-                  </ul>
-						  	</div>
-						</div>
-					</div>
 				</div>
 	        </div>
 		</div>
@@ -247,20 +212,13 @@
 layui.use([ 'form', 'layer' ], function() {
 	$ = layui.jquery;
 	var layer = layui.layer;
-	var cuurentpage;
 	layui.carousel.render({
 	    elem: '#carousel'
 	    ,width: '100%' //设置容器宽度
 	    ,arrow: 'always' //始终显示箭头
 	    //,anim: 'updown' //切换动画方式
   	});
-  	layui.laypage.render({
-	    elem: 'pages' //注意，这里的 test1 是 ID，不用加 # 号
-	    ,count: 100 //数据总数，从服务端得到
-  	    ,limit: 10//每页个数
-  	    ,groups: 3//button个数
-  	});
-  	
+ 
   	$( "#searchBtn" ).click(function() {
   		window.location.href = "search?content=" + $("#search").val();
   	});

@@ -1,19 +1,31 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-	String username = (String)session.getAttribute("username");
-	String fill = "";
-	String href = "";
-	if(username == null){
-		username = "请登录";
-		href = "/ssm";
-		}
-	else{
-		href="javascript:;";
-		fill = "<dl class='layui-nav-child'><dd><a href='javascript:;'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+String username = (String)session.getAttribute("username");
+String curr = request.getAttribute("current").toString();
+int current = Integer.parseInt(curr);
+int pages = (int)request.getAttribute("pages");
+String fill = "";
+String href = "";
+String display = "";
+String display1 = "";
+String display2 = "";
+if(username == null){
+	username = "请登录";
+	href = "/ssm";
+	display="display:none";
 	}
+else{
+	href="javascript:;";
+	fill = "<dl class='layui-nav-child'><dd><a href='jsp/frontend/account.jsp'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+}
+if(current == 1){
+	display1 = "display:none";
+}
+if(current == pages){
+	display2 = "display:none";
+}
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -32,16 +44,28 @@
 	<link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
 	<script src="js/jquery.session.js"></script>
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/xadmin.css">
 </head>
 <body>
 	<header class="layui-bg-cyan">
 		<nav class="layui-container">
-			<ul class="layui-nav layui-bg-cyan">
+<ul class="layui-nav layui-bg-cyan">
  			    	    <li style="margin-left:-20px" class="layui-nav-item">
-					    	<a href="frontend">TRY1T BLOG</a>
+					    	<a href="frontend">BLOG</a>
 					  	</li>
-					  	<li class="layui-nav-item layui-this">
+					  	<li style="<%=display%>"class="layui-nav-item layui-this">
 					    	<a href="userweb">个人主页</a>
+					  	</li>
+					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
+					  	<dl class="layui-nav-child">
+					  	<dd><a href="search?category=0">分享</a></dd>
+					  	<dd><a href="search?category=1">新闻</a></dd>
+					  	<dd><a href="search?category=2">笔记</a></dd>
+					  	<dd><a href="search?category=3">展示</a></dd>
+					  	<dd><a href="search?category=4">大事件</a></dd>
+					  	</dl>
 					  	</li>
   <li style="float:right;margin-right:-20px" class="layui-nav-item">
     <a href="<%=href%>"><img src="images/default.jpg" class="layui-nav-img"><%=username%></a>
@@ -98,21 +122,27 @@
 						</div>
 					</div>
 </c:forEach>
-					<div class="layui-col-md12 margin20"></div>
-					<div class="layui-col-md12" id="pages"></div>
+										<div class="layui-col-md12 margin20 page">
+			
+				<a class="prev" href="/ssm/userweb?current=1">&lt;&lt;</a> 
+				<a style="<%=display1%>" class="num" href="/ssm/userweb?current=<%=current-1%>"><%=current-1%></a> 
+			    <span class="current" style="background-color:#009688"><%=current%></span> 
+			    <a style="<%=display2%>" class="num" href="/ssm/userweb?current=<%=current+1%>"><%=current+1%></a> 
+				<a class="next" href="/ssm/userweb?current=<%=pages%>">&gt;&gt;</a>
+		</div>
+		<div class="layui-col-md12 margin20"></div>
 				</div>
 	        </div>
-	        <div class="layui-col-md4">
+	        <div style="margin-top:-10px" class="layui-col-md4">
 				<div class="layui-row">
 					<div class="layui-col-md12">
 						<div class="layui-card">
 						  	<div class="layui-card-header">
 								<span class="layui-breadcrumb" lay-separator="|">
-									<a href="javascript:;">站点统计</a>
-									<a href="javascript:;">联系站长</a>
+									<a href="javascript:;">站点详情</a>
 								</span>
 						  	</div>
-						  	<div class="layui-card-body" id="stat" style="display: none;">
+						  	<div class="layui-card-body" id="stat" >
 						  		<table class="layui-table">
 								  	<colgroup>
 								    	<col width="120">
@@ -121,37 +151,15 @@
 								  	<tbody>
 								    	<tr>
 								      		<td>运行时间：</td>
-								      		<td>0 天</td>
+								      		<td>30 天</td>
 								    	</tr>
 								    	<tr>
 								      		<td>发表文章：</td>
-								      		<td>0 篇</td>
+								      		<td>${articlecount} 篇</td>
 								    	</tr>
 								    	<tr>
 								      		<td>注册用户：</td>
-								      		<td>0 人</td>
-								    	</tr>
-								  	</tbody>
-								</table>
-						  	</div>
-						  	<div class="layui-card-body" id="binfo">
-						  		<table class="layui-table">
-								  	<colgroup>
-								    	<col width="120">
-								    	<col width="230">
-								  	</colgroup>
-								  	<tbody>
-								    	<tr>
-								      		<td>QQ：</td>
-								      		<td>1185013588</td>
-								    	</tr>
-								    	<tr>
-								      		<td>Wechat：</td>
-								      		<td></td>
-								    	</tr>
-								    	<tr>
-								      		<td>qqGroup：</td>
-								      		<td></td>
+								      		<td>${usercount} 人</td>
 								    	</tr>
 								  	</tbody>
 								</table>
@@ -160,17 +168,6 @@
 					</div>
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div class="layui-card">
-						  	<div class="layui-card-header">
-								<span>
-									捐助本站
-								</span>
-						  	</div>
-						  	<div class="layui-card-body" style="text-align: center;">
-						    	<br/>
-						    	<p>无论多少，都是心意!</p>
-						  	</div>
-						</div>
 					</div>
 				</div>
 	        </div>

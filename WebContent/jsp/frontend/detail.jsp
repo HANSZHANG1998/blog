@@ -1,19 +1,22 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-	String username = (String)session.getAttribute("username");
-	String fill = "";
-	String href = "";
-	if(username == null){
-		username = "请登录";
-		href = "/ssm";
-		}
-	else{
-		href="javascript:;";
-		fill = "<dl class='layui-nav-child'><dd><a href='javascript:;'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+String username = (String)session.getAttribute("username");
+String fill = "";
+String href = "";
+String display = "";
+String display1 = "";
+String display2 = "";
+if(username == null){
+	username = "请登录";
+	href = "/ssm";
+	display="display:none";
 	}
+else{
+	href="javascript:;";
+	fill = "<dl class='layui-nav-child'><dd><a href='jsp/frontend/account.jsp'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+}
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -32,17 +35,25 @@
 	<link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/detail.css">
-	<script src="js/jquery.session.js"></script>
 </head>
 <body>
 <header class="layui-bg-cyan">
 		<nav class="layui-container">
-			<ul class="layui-nav layui-bg-cyan">
- 			    	    <li style="margin-left:-20px" class="layui-nav-item layui-this">
-					    	<a href="frontend">TRY1T BLOG</a>
+		<ul class="layui-nav layui-bg-cyan">
+ 			    	    <li style="margin-left:-20px" class="layui-nav-item">
+					    	<a href="frontend">BLOG</a>
 					  	</li>
-					  	<li class="layui-nav-item">
-					    	<a href="">个人主页</a>
+					  	<li style="<%=display%>"class="layui-nav-item">
+					    	<a href="userweb">个人主页</a>
+					  	</li>
+					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
+					  	<dl class="layui-nav-child">
+					  	<dd><a href="search?category=0">分享</a></dd>
+					  	<dd><a href="search?category=1">新闻</a></dd>
+					  	<dd><a href="search?category=2">笔记</a></dd>
+					  	<dd><a href="search?category=3">展示</a></dd>
+					  	<dd><a href="search?category=4">大事件</a></dd>
+					  	</dl>
 					  	</li>
   <li style="float:right;margin-right:-20px" class="layui-nav-item">
     <a href="<%=href%>"><img src="images/default.jpg" class="layui-nav-img"><%=username%></a>
@@ -108,7 +119,6 @@
 						  			<div class="layui-col-md4">
 										<div class="layui-card">
 										  	<a href="" class="layui-card-body recommend">
-										    	<img src="#">
 										    	<p>用layui做一个独立博客网站（响应式模板）</p>
 										  	</a>
 										</div>
@@ -140,41 +150,19 @@
 								  	<tbody>
 								    	<tr>
 								      		<td>运行时间：</td>
-								      		<td>0 天</td>
+								      		<td>30 天</td>
 								    	</tr>
 								    	<tr>
 								      		<td>发表文章：</td>
-								      		<td>0 篇</td>
+								      		<td>${articlecount} 篇</td>
 								    	</tr>
 								    	<tr>
 								      		<td>注册用户：</td>
-								      		<td>0 人</td>
+								      		<td>${usercount} 人</td>
 								    	</tr>
 								  	</tbody>
 								</table>
-						  	</div>
-						  	<div class="layui-card-body" id="binfo" style="display: none;">
-						  		<table class="layui-table">
-								  	<colgroup>
-								    	<col width="120">
-								    	<col width="230">
-								  	</colgroup>
-								  	<tbody>
-								    	<tr>
-								      		<td>QQ：</td>
-								      		<td>1185013588</td>
-								    	</tr>
-								    	<tr>
-								      		<td>Wechat：</td>
-								      		<td></td>
-								    	</tr>
-								    	<tr>
-								      		<td>qqGroup：</td>
-								      		<td></td>
-								    	</tr>
-								  	</tbody>
-								</table>
-						  	</div>
+						  	</div>		
 						</div>
 					</div>
 					<div class="layui-col-md12 margin20"></div>
@@ -194,20 +182,6 @@
 						  	</div>
 						</div>
 					</div>
-					<div class="layui-col-md12 margin20"></div>
-					<div class="layui-col-md12">
-						<div class="layui-card">
-						  	<div class="layui-card-header">
-								<span>
-									捐助本站
-								</span>
-						  	</div>
-						  	<div class="layui-card-body" style="text-align: center;">
-						    	<br/>
-						    	<p>无论多少，都是心意!</p>
-						  	</div>
-						</div>
-					</div>
 				</div>
 	        </div>
 		</div>
@@ -224,13 +198,46 @@
 	</footer>
 </body>
 <script src="lib/layui/layui.all.js"></script>
-<script>  	$( "#logout" ).click(function() {
-	  layer.confirm("确定退出吗", {
-		    yes:function(){
-		    	$.session.remove('key');
-		    	window.location.reload();
-		    }
-		});
-	  
-	});</script>
+<script> 
+layui.use([ 'form', 'layer' ], function() {
+	$ = layui.jquery;
+	var layer = layui.layer;
+	layui.carousel.render({
+	    elem: '#carousel'
+	    ,width: '100%' //设置容器宽度
+	    ,arrow: 'always' //始终显示箭头
+	    //,anim: 'updown' //切换动画方式
+  	});
+  	layui.laypage.render({
+	    elem: 'pages' //注意，这里的 test1 是 ID，不用加 # 号
+	    ,count: 123 //数据总数，从服务端得到
+  	});
+  	
+  	$( "#logout" ).click(function() {
+  	  layer.confirm("确定退出吗", {
+			    yes:function(){
+					$.ajax({
+						type : "POST",
+						contentType : "application/json",
+						url : "/ssm/logout",
+						data : "",
+						dataType : "json",
+						success : function(data) {
+							var obj = JSON.parse(data);
+							if (obj.result == "success") {	
+								window.location.reload();
+							} else if (obj.result == "fail") {
+								layer.alert("error-debug1")
+							}
+						},
+						error : function(e) {
+							layer.alert("error-debug2");
+							window.location.href = "/ssm/frontend";
+						}
+					});
+			    }
+			});
+  	  
+  	});
+});</script>
 </html>

@@ -239,30 +239,38 @@ public class BlogController {
 	@RequestMapping("userweb")
 	public ModelAndView userweb(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
-		int current;
-		if (request.getParameter("pagenum") == null) {
-			current = 1;
-		} else {
-			current = Integer.parseInt(request.getParameter("pagenum"));
-		}
+		String username = (String)session.getAttribute("username");
 		ModelAndView mav = new ModelAndView();
+		String current  = (String) request.getAttribute("current");
+		int currentpage = 0;
+		if(current == null) {
+			currentpage = 1;
+		}else {
+			currentpage = Integer.parseInt(current);
+		}
+		int pages;
 		List<Blog> cs = blogService.getBlogByUsername(username);
-		List<Blog> newblog;
-		int total = cs.size() / 10;
-		if (total * 10 != cs.size()) {
-			total = total + 1;
+		if(cs.isEmpty()) {
+			pages = 1;
+		}else {
+			if(cs.size()%10 != 0) {
+		pages = (cs.size()/10) + 1;
+		}else {
+			pages = cs.size()/10;
 		}
-		if (current != total) {
-			newblog = cs.subList((current - 1) * 10, (current) * 10);
-		} else {
-			newblog = cs.subList((current - 1) * 10, cs.size());
 		}
-		mav.addObject("cs", newblog);
+		if(currentpage == pages){
+			cs.subList((currentpage-1)*10, cs.size());
+		}else {
+			cs.subList((currentpage-1)*10, currentpage*10-1);
+		}
+		List<User> cs2 = userService.list();
+		mav.addObject("articlecount", cs.size());
+		mav.addObject("usercount", cs2.size());
+		mav.addObject("cs", cs);
 		mav.setViewName("frontend/userweb");
-		mav.addObject("count", cs.size());
-		session.setAttribute("pagenum", current);
-		session.setAttribute("count", cs.size());
+		request.setAttribute("current", currentpage);
+		request.setAttribute("pages", pages);
 		return mav;
 	}
 	
@@ -272,8 +280,13 @@ public class BlogController {
 		String id = request.getParameter("id");
 		List<Blog> cs = blogService.getById(id);
 		mav.addObject("cs", cs);
+		List<User> cs2 = userService.list();
+		List<Blog> cs3 = blogService.list();
+		mav.addObject("articlecount", cs3.size());
+		mav.addObject("usercount", cs2.size());
 		mav.setViewName("frontend/detail");
 		return mav;
+	}
 	}
 	
 }
