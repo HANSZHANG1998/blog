@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.how2java.mapper.BlogMapper;
 import com.how2java.pojo.Blog;
 import com.how2java.pojo.Tag;
 import com.how2java.pojo.User;
@@ -66,7 +67,7 @@ public class BlogController {
 		blog.setState("publish");
 		blog.setDate(date);
 		blog.setContent(content);
-		blog.setViews("0");
+		blog.setViews(0);
 		blog.setCategory(category);
 		blog.setTop(top);
 		Tag tag = new Tag();
@@ -279,6 +280,12 @@ public class BlogController {
 		ModelAndView mav = new ModelAndView();
 		String id = request.getParameter("id");
 		List<Blog> cs = blogService.getById(id);
+		Blog blog = new Blog();
+		blog.setId(id);
+		int views = cs.get(0).getViews();
+		views++;
+		blog.setViews(views);
+		blogService.updateViews(blog); 
 		mav.addObject("cs", cs);
 		List<User> cs2 = userService.list();
 		List<Blog> cs3 = blogService.list();

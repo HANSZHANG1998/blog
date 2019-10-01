@@ -7,7 +7,7 @@ public class Blog {
      private String username;
      private String article;
      private String state;
-     private String views;
+     private int views;
      private String category;
      private String top;
      public String getCategory() {
@@ -61,10 +61,10 @@ public class Blog {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getViews() {
+	public int getViews() {
 		return views;
 	}
-	public void setViews(String views) {
+	public void setViews(int views) {
 		this.views = views;
 	}
 	public String getDate() {

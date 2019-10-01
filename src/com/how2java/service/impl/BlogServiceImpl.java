@@ -43,5 +43,11 @@ public class BlogServiceImpl implements BlogService{
 	public List<Blog> getBlogByUsername(String username) {
 		return blogMapper.getBlogByUsername(username);
 	}
+
+	@Override
+	public void updateViews(Blog blog) {
+		 blogMapper.updateViews(blog);
+	}
+
 	
 }

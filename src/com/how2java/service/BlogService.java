@@ -12,4 +12,5 @@ public interface BlogService {
 	List<Blog> getById(String id);
 	List<Blog> getByUsername(String id);
 	List<Blog> getBlogByUsername(String id);
+	public void updateViews(Blog blog);
 }

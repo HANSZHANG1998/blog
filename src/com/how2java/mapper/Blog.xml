@@ -30,6 +30,9 @@
 	    
 	    <select id="list" resultType="Blog">
 	        select * from blog      
+	    </select>
+	     <select id="updateViews" parameterType="Blog">
+	        update blog set views=#{views} where id=#{id} 
 	    </select>	    
 	</mapper>
 
