@@ -204,7 +204,7 @@ public class BlogController {
 	@RequestMapping("frontend")
 	public ModelAndView frontend(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ModelAndView mav = new ModelAndView();
-		String current  = (String) request.getAttribute("current");
+		String current  = (String) request.getParameter("current");
 		int currentpage = 0;
 		if(current == null) {
 			currentpage = 1;
@@ -242,7 +242,7 @@ public class BlogController {
 		HttpSession session = request.getSession();
 		String username = (String)session.getAttribute("username");
 		ModelAndView mav = new ModelAndView();
-		String current  = (String) request.getAttribute("current");
+		String current  = (String) request.getParameter("current");
 		int currentpage = 0;
 		if(current == null) {
 			currentpage = 1;
@@ -295,5 +295,42 @@ public class BlogController {
 		return mav;
 	}
 	
+	@RequestMapping("search")
+	public ModelAndView search(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		ModelAndView mav = new ModelAndView();
+		String current  = (String) request.getParameter("current");
+		String content  = (String) request.getParameter("content");
+		int currentpage = 0;
+		if(current == null) {
+			currentpage = 1;
+		}else {
+			currentpage = Integer.parseInt(current);
+		}
+		int pages;
+		List<Blog> cs = blogService.searchlike(content);
+		if(cs.isEmpty()) {
+			pages = 1;
+		}else {
+			if(cs.size()%10 != 0) {
+		pages = (cs.size()/10) + 1;
+		}else {
+			pages = cs.size()/10;
+		}
+		}
+		if(currentpage == pages){
+			cs.subList((currentpage-1)*10, cs.size());
+		}else {
+			cs.subList((currentpage-1)*10, currentpage*10-1);
+		}
+		List<User> cs2 = userService.list();
+		mav.addObject("articlecount", cs.size());
+		mav.addObject("usercount", cs2.size());
+		mav.addObject("search", content);
+		mav.addObject("cs", cs);
+		mav.setViewName("frontend/search");
+		request.setAttribute("current", currentpage);
+		request.setAttribute("pages", pages);
+		return mav;
+	}
 	
 }

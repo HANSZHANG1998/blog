@@ -49,5 +49,10 @@ public class BlogServiceImpl implements BlogService{
 		 blogMapper.updateViews(blog);
 	}
 
+	@Override
+	public List<Blog> searchlike(String content) {
+        return blogMapper.searchlike(content);
+	}
+
 	
 }

@@ -31,8 +31,13 @@
 	    <select id="list" resultType="Blog">
 	        select * from blog      
 	    </select>
-	     <select id="updateViews" parameterType="Blog">
+	    
+	     <update id="updateViews" parameterType="Blog">
 	        update blog set views=#{views} where id=#{id} 
-	    </select>	    
+	    </update>	 
+	       
+	    <select id="searchlike" parameterType="String" resultType="Blog">
+	        select * from blog where content like concat('%',#{content},'%')       
+	    </select>
 	</mapper>
 

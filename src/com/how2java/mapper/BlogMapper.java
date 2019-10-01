@@ -23,4 +23,6 @@ public interface BlogMapper {
     
     public int count();  
     
+    public List<Blog> searchlike(String content);
+    
 }
