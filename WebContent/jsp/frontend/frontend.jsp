@@ -51,10 +51,16 @@
 		<nav class="layui-container">
 			<ul class="layui-nav layui-bg-cyan">
  			    	    <li style="margin-left:-20px" class="layui-nav-item layui-this">
-					    	<a href="frontend">TRY1T BLOG</a>
+					    	<a href="frontend">TRY1T</a>
 					  	</li>
 					  	<li style="<%=display%>"class="layui-nav-item">
 					    	<a href="userweb">个人主页</a>
+					  	</li>
+					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
+					  	<dl class="layui-nav-child">
+					  	<dd><a href="javascript:;">分类1</a></dd>
+					  	<dd></dd>
+					  	</dl>
 					  	</li>
   <li style="float:right;margin-right:-20px" class="layui-nav-item">
     <a href="<%=href%>"><img src="images/default.jpg" class="layui-nav-img"><%=username%></a>
@@ -77,20 +83,26 @@
 					  		</div>
 						</div>
 					</div>
-					
-					<div class="layui-col-md12">
-				<div class="layui-tab layui-tab-brief">
-               <ul class="layui-tab-title">
-               <li style="width:18%">技术分享</li>
-               <li style="width:18%">项目展示</span></li>
-               <li style="width:18%">大事件</li>
-               <li style="width:18%">心情动态</li>
-                  </ul>
-                 <div class="layui-tab-content"></div>
-                 </div>
-					</div>
-					
-					
+                 			<div class="layui-col-md12 margin20"></div>
+                 	<div class="layui-col-md12">
+						<div class="main zdbox">
+								 <div class="layui-row">
+    <div class="layui-col-xs3">
+     <button type="button" class="layui-btn layui-btn-radius">默认按钮</button>
+    </div>
+    <div class="layui-col-xs3">
+     <button type="button" class="layui-btn layui-btn-radius">默认按钮</button>
+    </div>
+    <div class="layui-col-xs3">
+     <button type="button" class="layui-btn layui-btn-radius">默认按钮</button>
+    </div>
+    <div class="layui-col-xs3">
+      <button type="button" class="layui-btn layui-btn-radius">默认按钮</button>
+    </div>
+  </div>
+						</div>
+					</div>			
+				<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
 						<div class="main zdbox">
 							<div class="subject"><b>[置顶]</b><a href="">${c.title}</a><em>${c.date}发布</em></div>
