@@ -3,6 +3,12 @@
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 String username = (String)session.getAttribute("username");
+String curr = request.getAttribute("current").toString();
+int current = Integer.parseInt(curr);
+int pages = (int)request.getAttribute("pages");
+String cate = (String)request.getAttribute("category");
+String category = "";
+if(cate.equals("0")){category = "分享";}else if(cate.equals("1")){category = "新闻";}else if(cate.equals("2")){category = "笔记";}else if(cate.equals("3")){category = "展示";}else if(cate.equals("4")){category = "大事件";}
 String fill = "";
 String href = "";
 String display = "";
@@ -16,6 +22,12 @@ if(username == null){
 else{
 	href="javascript:;";
 	fill = "<dl class='layui-nav-child'><dd><a href='jsp/frontend/account.jsp'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+}
+if(current == 1){
+	display1 = "display:none";
+}
+if(current == pages){
+	display2 = "display:none";
 }
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -34,12 +46,15 @@ else{
 	<base href=" <%=basePath%>">
 	<link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/detail.css">
+	<script src="js/jquery.session.js"></script>
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/xadmin.css">
 </head>
 <body>
-<header class="layui-bg-cyan">
+	<header class="layui-bg-cyan">
 		<nav class="layui-container">
-		<ul class="layui-nav layui-bg-cyan">
+<ul class="layui-nav layui-bg-cyan">
  			    	    <li style="margin-left:-20px" class="layui-nav-item">
 					    	<a href="frontend">BLOG</a>
 					  	</li>
@@ -66,82 +81,68 @@ else{
 		<div class="layui-row layui-col-space20">
 			<div class="layui-col-md8">
 				<div class="layui-row">
-					<div class="layui-col-md12">
-						<c:forEach items="${cs}" var="c" varStatus="st"> 
-						<div class="main">
-							<div class="title">
-								<p>${c.title}</p>
-								<div class="layui-row stat">
-									<div class="layui-col-md3 layui-col-xs12">发布时间：<em>${c.date}</em></div>
-									<div class="layui-col-md2 layui-col-xs6">分类：<a href="#">PHP</a></div>
-									<div class="layui-col-md2 layui-col-xs6">作者：<a href="#">${c.username}</a></div>
-									<div class="layui-col-md5 layui-col-xs12">
-										<div class="layui-row">
-											<div class="layui-col-md6 layui-col-xs6">
-												<i class="layui-icon layui-icon-reply-fill"></i>
-												<em>0条评论</em>
-											</div>
-											<div class="layui-col-md6 layui-col-xs6">
-												<i class="layui-icon layui-icon-read"></i>
-												<em>${c.views}</em>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="content">
-							 ${c.content}
-							</div>
-							<div class="copyright">
-								<p>转载声明：本站文章若无特别说明，皆为原创，转载请注明来源：TRY1T博客，谢谢！^^</p>
-							</div>
-							<div class="operation">
-								<a href="javascript:;" class="layui-btn layui-btn-normal">点赞</a>
-							</div>
-							<div class="Label">
-								<i class="layui-icon layui-icon-note"></i>
-								<a href="javascript:;">PHP</a>
-								<a href="javascript:;">Discuz</a>
-							</div>
+                    <div class="layui-col-md12">
+						<div class="layui-card">
+						  	<div class="layui-card-body" style="text-align: center;">
+                             分类"<%=category%>"
+						  	</div>
 						</div>
-						</c:forEach>
 					</div>
+					
+					<c:forEach items="${cs}" var="c" varStatus="st"> 
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div class="layui-card">
-						  	<div class="layui-card-header">
-								<span>
-									相关推荐
-								</span>
-						  	</div>
-						  	<div class="layui-card-body">
-						  		<div class="layui-row">
-						  			<div class="layui-col-md4">
-										<div class="layui-card">
-										  	<a href="" class="layui-card-body recommend">
-										    	<p>用layui做一个独立博客网站（响应式模板）</p>
-										  	</a>
+						<div class="main list">
+							<div class="subject"><a href="detail?id=${c.id}">${c.title}</a><em>&nbsp&nbsp${c.date}发布</em></div>
+							<div class="content layui-row">
+								
+									<div class="list-text">${c.content}</div>
+									<div class="list-stat layui-row">
+
+										<div class="layui-col-xs3 layui-col-md3 Label">
+											<i class="layui-icon layui-icon-note"></i>
+											<a href="javascript:;">PHP</a>
+											<a href="javascript:;">Discuz</a>
 										</div>
-					  				</div>
-						  		</div>
-						  	</div>
+
+										<div class="layui-col-xs3 layui-col-md3">
+											<i class="layui-icon layui-icon-reply-fill"></i>
+											<em>0条评论</em>
+										</div>
+
+										<div class="layui-col-xs3 layui-col-md3">
+											<i class="layui-icon layui-icon-read"></i>
+											<em>${c.views}次阅读</em>
+										</div>
+
+										<div class="layui-col-xs3 layui-col-md3 alink">
+											<a href="detail?id=${c.id}" class="layui-btn layui-btn-xs">阅读原文</a>
+										</div>
+									</div>
+							</div>
 						</div>
 					</div>
+</c:forEach>
+										<div class="layui-col-md12 margin20 page">
+				<a class="prev" href="/ssm/cate?current=1&category=${category}">&lt;&lt;</a> 
+				<a style="<%=display1%>" class="num" href="/ssm/cate?current=<%=current-1%>&category=${category}"><%=current-1%></a> 
+			    <span class="current" style="background-color:#009688"><%=current%></span> 
+			    <a style="<%=display2%>" class="num" href="/ssm/cate?current=<%=current+1%>&category=${category}"><%=current+1%></a> 
+				<a class="next" href="/ssm/cate?current=<%=pages%>&category=${category}">&gt;&gt;</a>
+		</div>
+		<div class="layui-col-md12 margin20"></div>
 				</div>
 	        </div>
-
-
-	        <div class="layui-col-md4">
+	        <div style="margin-top:-10px" class="layui-col-md4">
 				<div class="layui-row">
 					<div class="layui-col-md12">
 						<div class="layui-card">
 						  	<div class="layui-card-header">
 								<span class="layui-breadcrumb" lay-separator="|">
-									<a href="javascript:;">站点统计</a>
-									<a href="javascript:;">联系站长</a>
+									<a href="javascript:;">站点详情</a>
 								</span>
 						  	</div>
-						  	<div class="layui-card-body" id="stat">
+						  	<div class="layui-card-body" id="stat" >
 						  		<table class="layui-table">
 								  	<colgroup>
 								    	<col width="120">
@@ -162,31 +163,16 @@ else{
 								    	</tr>
 								  	</tbody>
 								</table>
-						  	</div>		
+						  	</div>
 						</div>
 					</div>
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div class="layui-card">
-						  	<div class="layui-card-header">
-								<span>
-									热门文章
-								</span>
-						  	</div>
-						  	<div class="layui-card-body">
-								<table class="layui-table" lay-skin="nob">
-								  	<tbody>
-								    	<tr><td><a href="javascript:;">用layui做一个独立博客网站（响应式模板）</a></td></tr>
-								  	</tbody>
-								</table>
-						  	</div>
-						</div>
 					</div>
 				</div>
 	        </div>
 		</div>
 	</div>
-
 	<!-- 尾部 -->
 	<div class="footer"></div>
 	<footer class="layui-bg-cyan">
@@ -198,7 +184,8 @@ else{
 	</footer>
 </body>
 <script src="lib/layui/layui.all.js"></script>
-<script> 
+
+<script>
 layui.use([ 'form', 'layer' ], function() {
 	$ = layui.jquery;
 	var layer = layui.layer;
@@ -211,6 +198,10 @@ layui.use([ 'form', 'layer' ], function() {
   	layui.laypage.render({
 	    elem: 'pages' //注意，这里的 test1 是 ID，不用加 # 号
 	    ,count: 123 //数据总数，从服务端得到
+  	});
+  	
+  	$( "#searchBtn" ).click(function() {
+  		window.location.href = "search?content=" + $("#search").val();
   	});
   	
   	$( "#logout" ).click(function() {
@@ -239,5 +230,7 @@ layui.use([ 'form', 'layer' ], function() {
 			});
   	  
   	});
-});</script>
+});
+  	
+</script>
 </html>

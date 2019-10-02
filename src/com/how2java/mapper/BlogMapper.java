@@ -14,6 +14,8 @@ public interface BlogMapper {
     public List<Blog> getByUsername(String username);  
     
     public List<Blog> getBlogByUsername(String username);  
+    
+    public List<Blog> getBlogByCategory(String category);  
       
     public int update(Blog blog);
     

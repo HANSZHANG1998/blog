@@ -54,5 +54,10 @@ public class BlogServiceImpl implements BlogService{
         return blogMapper.searchlike(content);
 	}
 
+	@Override
+	public List<Blog> getBlogByCategory(String category) {
+		return blogMapper.getBlogByCategory(category);
+	}
+
 	
 }

@@ -60,11 +60,11 @@ if(current == pages){
 					  	</li>
 					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
 					  	<dl class="layui-nav-child">
-					  	<dd><a href="search?category=0">分享</a></dd>
-					  	<dd><a href="search?category=1">新闻</a></dd>
-					  	<dd><a href="search?category=2">笔记</a></dd>
-					  	<dd><a href="search?category=3">展示</a></dd>
-					  	<dd><a href="search?category=4">大事件</a></dd>
+					  	<dd><a href="cate?category=0">分享</a></dd>
+					  	<dd><a href="cate?category=1">新闻</a></dd>
+					  	<dd><a href="cate?category=2">笔记</a></dd>
+					  	<dd><a href="cate?category=3">展示</a></dd>
+					  	<dd><a href="cate?category=4">大事件</a></dd>
 					  	</dl>
 					  	</li>
   <li style="float:right;margin-right:-20px" class="layui-nav-item">
@@ -219,7 +219,7 @@ layui.use([ 'form', 'layer' ], function() {
 						success : function(data) {
 							var obj = JSON.parse(data);
 							if (obj.result == "success") {	
-								window.location.href = "/ssm/frontend";
+								window.location.reload();
 							} else if (obj.result == "fail") {
 								layer.alert("error-debug1")
 							}

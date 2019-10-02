@@ -45,11 +45,11 @@
 			<div class="layui-input-block">
 				<select id="category" name="category">
 					<option value="" class="max_width500"></option>
-					<option value="0" class="max_width500">php</option>
-					<option value="1" class="max_width500">ruby</option>
-					<option value="2" class="max_width500">python</option>
-					<option value="3" class="max_width500">html</option>
-					<option value="4" class="max_width500">Discuz</option>
+					<option value="0" class="max_width500">分享</option>
+					<option value="1" class="max_width500">新闻</option>
+					<option value="2" class="max_width500">笔记</option>
+					<option value="3" class="max_width500">展示</option>
+					<option value="4" class="max_width500">大事件</option>
 				</select>
 			</div>
 		</div>

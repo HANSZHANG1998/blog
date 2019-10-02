@@ -39,5 +39,9 @@
 	    <select id="searchlike" parameterType="String" resultType="Blog">
 	        select * from blog where content like concat('%',#{content},'%')       
 	    </select>
+	    
+	    <select id="getBlogByCategory" parameterType="String" resultType="Blog">
+	        select * from  blog  where category= #{category}    
+	    </select>
 	</mapper>
 

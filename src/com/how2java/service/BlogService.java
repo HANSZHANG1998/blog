@@ -14,4 +14,5 @@ public interface BlogService {
 	List<Blog> getBlogByUsername(String id);
 	public void updateViews(Blog blog);
     public List<Blog> searchlike(String content);
+    public List<Blog> getBlogByCategory(String category); 
 }
