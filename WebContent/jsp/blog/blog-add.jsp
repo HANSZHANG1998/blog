@@ -56,7 +56,7 @@
 					type="checkbox" id="id3" title="问题解答">
 			</div>
 		</div>
-		<div class="layui-form-item">
+		<div style="display:none" class="layui-form-item">
 			<label class="layui-form-label">置顶</label>
 			<div class="layui-input-block">
 				<input id="top" type="checkbox" lay-skin="switch">
