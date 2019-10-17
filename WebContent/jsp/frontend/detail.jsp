@@ -8,6 +8,9 @@ String href = "";
 String display = "";
 String display1 = "";
 String display2 = "";
+String category = "";
+String cate = (String)request.getAttribute("category");
+if(cate.equals("0")){category = "分享";}else if(cate.equals("1")){category = "新闻";}else if(cate.equals("2")){category = "笔记";}else if(cate.equals("3")){category = "展示";}else if(cate.equals("4")){category = "大事件";}
 if(username == null){
 	username = "请登录";
 	href = "/ssm";
@@ -73,8 +76,8 @@ else{
 								<p>${c.title}</p>
 								<div class="layui-row stat">
 									<div class="layui-col-md3 layui-col-xs12">发布时间：<em>${c.date}</em></div>
-									<div class="layui-col-md2 layui-col-xs6">分类：<a href="#">PHP</a></div>
-									<div class="layui-col-md2 layui-col-xs6">作者：<a href="#">${c.username}</a></div>
+									<div class="layui-col-md2 layui-col-xs6">分类：<a><%=category%></a></div>
+									<div class="layui-col-md2 layui-col-xs6">作者：<a>${c.username}</a></div>
 									<div class="layui-col-md5 layui-col-xs12">
 										<div class="layui-row">
 											<div class="layui-col-md6 layui-col-xs6">
@@ -100,8 +103,6 @@ else{
 							</div>
 							<div class="Label">
 								<i class="layui-icon layui-icon-note"></i>
-								<a href="javascript:;">PHP</a>
-								<a href="javascript:;">Discuz</a>
 							</div>
 						</div>
 						</c:forEach>

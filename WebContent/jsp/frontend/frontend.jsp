@@ -109,8 +109,8 @@
 
 										<div class="layui-col-xs3 layui-col-md3 Label">
 											<i class="layui-icon layui-icon-note"></i>
-											<a href="javascript:;">PHP</a>
-											<a href="javascript:;">Discuz</a>
+											<a></a>
+									
 										</div>
 
 										<div class="layui-col-xs3 layui-col-md3">

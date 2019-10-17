@@ -283,6 +283,7 @@ public class BlogController {
 		List<Blog> cs = blogService.getById(id);
 		Blog blog = new Blog();
 		blog.setId(id);
+		String category = cs.get(0).getCategory();
 		int views = cs.get(0).getViews();
 		views++;
 		blog.setViews(views);
@@ -292,6 +293,7 @@ public class BlogController {
 		List<Blog> cs3 = blogService.list();
 		mav.addObject("articlecount", cs3.size());
 		mav.addObject("usercount", cs2.size());
+		request.setAttribute("category", category);
 		mav.setViewName("frontend/detail");
 		return mav;
 	}
