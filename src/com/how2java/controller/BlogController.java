@@ -2,7 +2,7 @@ package com.how2java.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,10 +23,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -42,9 +44,18 @@ public class BlogController {
 	
 	@RequestMapping("blog-add")
 	public void blogadd(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// 接受request数据
+		BufferedReader reader = request.getReader();
+		String readerStr = "";// 接收用户端传来的JSON字符串
+		String line;
+		while ((line = reader.readLine()) != null) {
+			readerStr = readerStr.concat(line);
+		}
+		@SuppressWarnings("rawtypes")
+		HashMap map = JSONObject.parseObject(readerStr, HashMap.class);
+		String content = (String) map.get("content");
 		String title = URLDecoder.decode(request.getParameter("title"),"UTF-8");
 		String subtitle = URLDecoder.decode(request.getParameter("subtitle"),"UTF-8");
-		String content = URLDecoder.decode(request.getParameter("content"),"UTF-8");
 		String username = "admin";
 		String id1 = URLDecoder.decode(request.getParameter("id1"),"UTF-8");
 		String id2 = URLDecoder.decode(request.getParameter("id2"),"UTF-8");
@@ -153,6 +164,7 @@ public class BlogController {
 		String id = request.getParameter("id");
 		List<Blog> cs = blogService.getById(id);
 		mav.addObject("cs", cs);
+		mav.addObject("content", cs.get(0).getContent());
 		mav.setViewName("blog/blog-edit");
 		return mav;
 	}
@@ -160,9 +172,18 @@ public class BlogController {
 	@RequestMapping("blog-edit")
 	public void blogedit(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// 接受request数据
+		BufferedReader reader = request.getReader();
+		String readerStr = "";// 接收用户端传来的JSON字符串
+		String line;
+		while ((line = reader.readLine()) != null) {
+			readerStr = readerStr.concat(line);
+		}
+
+		@SuppressWarnings("rawtypes")
+		HashMap map = JSONObject.parseObject(readerStr, HashMap.class);
+		String content = (String) map.get("content");
 		String title = URLDecoder.decode(request.getParameter("title"),"UTF-8");
 		String subtitle = URLDecoder.decode(request.getParameter("subtitle"),"UTF-8");
-		String content = URLDecoder.decode(request.getParameter("content"),"UTF-8");
 		String id = URLDecoder.decode(request.getParameter("id"),"UTF-8");
 		String top = URLDecoder.decode(request.getParameter("top"),"UTF-8");
 		String category = URLDecoder.decode(request.getParameter("category"),"UTF-8");
