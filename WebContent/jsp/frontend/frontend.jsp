@@ -142,9 +142,10 @@
 		
 		</div>
 			<div class="layui-col-md12 margin20"></div>
-				</div>
+			</div>
 	        </div>
-	        <div style="margin-top:-10px" class="layui-col-md4">
+	        		<div class="margin20"></div>
+	        <div style="margin-top:20px" class="layui-col-md4">
 				<div class="layui-row">
 					<div class="layui-col-md12">
 						<div class="layui-card">

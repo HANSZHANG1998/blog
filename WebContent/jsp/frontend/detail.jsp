@@ -33,7 +33,7 @@ else{
   	<meta name="apple-mobile-web-app-status-bar-style" content="black"> 
   	<meta name="apple-mobile-web-app-capable" content="yes">
   	<meta name="format-detection" content="telephone=no">
-    <title>TRY1T</title>
+    <title>${title}</title>
 	<base href=" <%=basePath%>">
 	<link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">

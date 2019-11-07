@@ -314,6 +314,7 @@ public class BlogController {
 		List<Blog> cs3 = blogService.list();
 		mav.addObject("articlecount", cs3.size());
 		mav.addObject("usercount", cs2.size());
+		mav.addObject("title", cs.get(0).getTitle());
 		request.setAttribute("category", category);
 		mav.setViewName("frontend/detail");
 		return mav;
