@@ -18,7 +18,7 @@
 		}
 	else{
 		href="javascript:;";
-		fill = "<dl class='layui-nav-child'><dd><a href='jsp/account.jsp'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+		fill = "<dl class='layui-nav-child'><dd><a href='account'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
 	}
 	if(current == 1){
 		display1 = "display:none";
@@ -42,14 +42,15 @@
   	<meta name="format-detection" content="telephone=no">
     <title>TRY1T</title>
 	<base href=" <%=basePath%>">
-	<link rel="stylesheet" href="lib/layui/css/layui.css">
+	<script src="js/jquery.session.js"></script>
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/xadmin.css">
 </head>
 <body>
-	<header class="layui-bg-cyan">
+		<header style="background-color:#005f49">
 		<nav class="layui-container">
-			<ul class="layui-nav layui-bg-cyan">
+<ul style="background-color:#005f49" class="layui-nav">
  			    	    <li style="margin-left:-20px" class="layui-nav-item layui-this">
 					    	<a href="frontend">BLOG</a>
 					  	</li>
@@ -58,7 +59,7 @@
 					  	</li>
 					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
 					  	<dl class="layui-nav-child">
-					  	<dd><a href="cate?category=0">分享</a></dd>
+					  		<dd><a href="cate?category=0">分享</a></dd>
 					  	<dd><a href="cate?category=1">新闻</a></dd>
 					  	<dd><a href="cate?category=2">笔记</a></dd>
 					  	<dd><a href="cate?category=3">展示</a></dd>
@@ -72,14 +73,13 @@
 </ul>
 		</nav>
 	</header>
-	
 	<div class="layui-container">
 		<div class="layui-row layui-col-space20">
 			<div class="layui-col-md8">
 				<div class="layui-row">
 					<div class="layui-col-md12">
-						<div class="layui-carousel" id="carousel">
-					  		<div carousel-item>
+						<div style="border-radius: 25px;" class="layui-carousel" id="carousel">
+					  		<div style="border-radius: 25px;" carousel-item>
 							    <div><img src="images/1.jpg" alt=""></div>
 							    <div><img src="images/2.jpg" alt=""></div>
 					  		</div>
@@ -88,7 +88,7 @@
 
 				<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div class="main zdbox">
+						<div style="border-radius: 25px;" class="main zdbox">
 							<div class="subject"><b>[置顶]</b><a href="">${c.title}</a><em>${c.date}发布</em></div>
 							<div class="content">
 							${c.content}
@@ -99,7 +99,7 @@
 					<c:forEach items="${cs}" var="c" varStatus="st"> 
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div class="main list">
+						<div style="border-radius: 25px;" class="main list">
 			
 							<div class="subject"><a href="detail?id=${c.id}">${c.title}</a><em>&nbsp&nbsp${c.date}发布</em></div>
 							<div class="content layui-row">
@@ -141,14 +141,14 @@
 				<a class="next" href="/ssm/frontend?current=<%=pages%>">&gt;&gt;</a>
 		
 		</div>
-			<div class="layui-col-md12 margin20"></div>
 			</div>
+			<div class="layui-col-md12 margin20"></div>
 	        </div>
-	        		<div class="margin20"></div>
-	        <div style="margin-top:20px" class="layui-col-md4">
+	   
+	        <div class="layui-col-md4">
 				<div class="layui-row">
 					<div class="layui-col-md12">
-						<div class="layui-card">
+						<div style="border-radius: 25px;" class="layui-card">
 						  	<div class="layui-card-header">
 								<span class="layui-breadcrumb" lay-separator="|">
 									<a href="javascript:;">站点详情</a>
@@ -180,7 +180,7 @@
 					</div>
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div class="layui-card">
+						<div style="border-radius: 25px;" class="layui-card">
 						  	<div class="layui-card-header">
 								<span>
 									搜索

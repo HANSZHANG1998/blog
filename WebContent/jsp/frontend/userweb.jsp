@@ -18,7 +18,7 @@ if(username == null){
 	}
 else{
 	href="javascript:;";
-	fill = "<dl class='layui-nav-child'><dd><a href='jsp/frontend/account.jsp'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+	fill = "<dl class='layui-nav-child'><dd><a href='account'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
 }
 if(current == 1){
 	display1 = "display:none";
@@ -41,8 +41,6 @@ if(current == pages){
   	<meta name="format-detection" content="telephone=no">
     <title>TRY1T</title>
 	<base href=" <%=basePath%>">
-	<link rel="stylesheet" href="lib/layui/css/layui.css">
-	<link rel="stylesheet" href="css/common.css">
 	<script src="js/jquery.session.js"></script>
     <link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
@@ -79,7 +77,7 @@ if(current == pages){
 			<div class="layui-col-md8">
 				<div class="layui-row">
 					<div class="layui-col-md12">
-						<div class="main zdbox">
+						<div style="border-radius: 25px;" class="main zdbox">
 							<div class="subject"><b>[置顶]</b><a href="">${c.title}</a><em>${c.date}发布</em></div>
 							<div class="content">
 							${c.content}
@@ -90,7 +88,7 @@ if(current == pages){
 					<c:forEach items="${cs}" var="c" varStatus="st"> 
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div class="main list">
+						<div style="border-radius: 25px;" class="main list">
 						
 							<div class="subject"><a href="detail?id=${c.id}">${c.title}</a><em>&nbsp&nbsp${c.date}发布</em></div>
 							<div class="content layui-row">
@@ -130,13 +128,13 @@ if(current == pages){
 			    <a style="<%=display2%>" class="num" href="/ssm/userweb?current=<%=current+1%>"><%=current+1%></a> 
 				<a class="next" href="/ssm/userweb?current=<%=pages%>">&gt;&gt;</a>
 		</div>
-		<div class="layui-col-md12 margin20"></div>
 				</div>
+					<div class="layui-col-md12 margin20"></div>
 	        </div>
-	        <div style="margin-top:-10px" class="layui-col-md4">
+	        <div class="layui-col-md4">
 				<div class="layui-row">
 					<div class="layui-col-md12">
-						<div class="layui-card">
+						<div style="border-radius: 25px;" class="layui-card">
 						  	<div class="layui-card-header">
 								<span class="layui-breadcrumb" lay-separator="|">
 									<a href="javascript:;">站点详情</a>
@@ -173,15 +171,6 @@ if(current == pages){
 	        </div>
 		</div>
 	</div>
-	<!-- 尾部 -->
-	<div class="footer"></div>
-	<footer class="layui-bg-cyan">
-		<div class="layui-container">
-			<div class="layui-row">
-				<P>try1t.com All rights reserved</P>
-			</div>
-		</div>
-	</footer>
 </body>
 <script src="lib/layui/layui.all.js"></script>
 

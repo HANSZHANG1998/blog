@@ -18,7 +18,7 @@ if(username == null){
 	}
 else{
 	href="javascript:;";
-	fill = "<dl class='layui-nav-child'><dd><a href='jsp/frontend/account.jsp'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+	fill = "<dl class='layui-nav-child'><dd><a href='account'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
 }
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -40,18 +40,18 @@ else{
 	<link rel="stylesheet" href="css/detail.css">
 </head>
 <body>
-<header class="layui-bg-cyan">
+	<header class="layui-bg-cyan">
 		<nav class="layui-container">
-		<ul class="layui-nav layui-bg-cyan">
+<ul class="layui-nav layui-bg-cyan">
  			    	    <li style="margin-left:-20px" class="layui-nav-item">
 					    	<a href="frontend">BLOG</a>
 					  	</li>
-					  	<li style="<%=display%>"class="layui-nav-item">
+					  	<li style="<%=display%>"class="layui-nav-item layui-this">
 					    	<a href="userweb">个人主页</a>
 					  	</li>
 					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
 					  	<dl class="layui-nav-child">
-					  	<dd><a href="cate?category=0">分享</a></dd>
+					  		<dd><a href="cate?category=0">分享</a></dd>
 					  	<dd><a href="cate?category=1">新闻</a></dd>
 					  	<dd><a href="cate?category=2">笔记</a></dd>
 					  	<dd><a href="cate?category=3">展示</a></dd>
@@ -109,7 +109,7 @@ else{
 					</div>
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div class="layui-card">
+						<div style="border-radius: 25px;" class="layui-card">
 						  	<div class="layui-card-header">
 								<span>
 									相关推荐
@@ -118,7 +118,7 @@ else{
 						  	<div class="layui-card-body">
 						  		<div class="layui-row">
 						  			<div class="layui-col-md4">
-										<div class="layui-card">
+										<div style="border-radius: 25px;" class="layui-card">
 										  	<a href="" class="layui-card-body recommend">
 										    	<p>用layui做一个独立博客网站（响应式模板）</p>
 										  	</a>
@@ -135,7 +135,7 @@ else{
 	        <div class="layui-col-md4">
 				<div class="layui-row">
 					<div class="layui-col-md12">
-						<div class="layui-card">
+						<div style="border-radius: 25px;" class="layui-card">
 						  	<div class="layui-card-header">
 								<span class="layui-breadcrumb" lay-separator="|">
 									<a href="javascript:;">站点统计</a>
@@ -168,7 +168,7 @@ else{
 					</div>
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div class="layui-card">
+						<div style="border-radius: 25px;" class="layui-card">
 						  	<div class="layui-card-header">
 								<span>
 									热门文章
@@ -187,16 +187,6 @@ else{
 	        </div>
 		</div>
 	</div>
-
-	<!-- 尾部 -->
-	<div class="footer"></div>
-	<footer class="layui-bg-cyan">
-		<div class="layui-container">
-			<div class="layui-row">
-				<P>try1t.com All rights reserved</P>
-			</div>
-		</div>
-	</footer>
 </body>
 <script src="lib/layui/layui.all.js"></script>
 <script> 
