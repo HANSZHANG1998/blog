@@ -104,7 +104,7 @@
 
 										<div class="layui-col-xs3 layui-col-md3">
 											<i class="layui-icon layui-icon-reply-fill"></i>
-											<em>0条评论</em>
+											<em>${c.counts}条评论</em>
 										</div>
 
 										<div class="layui-col-xs3 layui-col-md3">

@@ -83,7 +83,7 @@ else{
 										<div class="layui-row">
 											<div class="layui-col-md6 layui-col-xs6">
 												<i class="layui-icon layui-icon-reply-fill"></i>
-												<em>0条评论</em>
+												<em>${cono}条评论</em>
 											</div>
 											<div class="layui-col-md6 layui-col-xs6">
 												<i class="layui-icon layui-icon-read"></i>

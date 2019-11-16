@@ -10,6 +10,7 @@ public class Blog {
      private int views;
      private String category;
      private String top;
+     private int counts;
      public String getCategory() {
 		return category;
 	}
@@ -78,6 +79,12 @@ public class Blog {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public int getCounts() {
+		return counts;
+	}
+	public void setCounts(int counts) {
+		this.counts = counts;
 	}
      
      

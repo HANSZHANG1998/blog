@@ -244,6 +244,11 @@ public class BlogController {
 			cs = cs.subList((currentpage-1)*10, currentpage*10-1);
 		}
 		List<User> cs2 = userService.list();
+		for(int i = 0; i < cs.size(); i++) {
+		String id = cs.get(i).getId();
+		int commentno = commentService.list(id).size();
+		cs.get(i).setCounts(commentno);
+		}
 		mav.addObject("articlecount", cs.size());
 		mav.addObject("usercount", cs2.size());
 		mav.addObject("cs", cs);
@@ -312,6 +317,7 @@ public class BlogController {
 		mav.addObject("usercount", cs2.size());
 		mav.addObject("title", cs.get(0).getTitle());
 		request.setAttribute("category", category);
+		mav.addObject("cono",comment.size());
 		mav.setViewName("frontend/detail");
 		return mav;
 	}
