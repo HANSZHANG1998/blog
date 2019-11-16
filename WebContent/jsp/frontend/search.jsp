@@ -13,7 +13,7 @@ String display1 = "";
 String display2 = "";
 if(username == null){
 	username = "请登录";
-	href = "/ssm";
+	href = "/ssm/login.jsp";
 	display="display:none";
 	}
 else{
@@ -80,7 +80,7 @@ if(current == pages){
 						<div style="border-radius: 25px;" class="layui-card">
 						  	<div class="layui-card-header">
 								<span>
-									搜索
+									搜索结果
 								</span>
 						  	</div>
 						  	<div class="layui-card-body" style="text-align: center;">
@@ -88,9 +88,8 @@ if(current == pages){
 						  	</div>
 						</div>
 					</div>
-					
-					<c:forEach items="${cs}" var="c" varStatus="st"> 
 					<div class="layui-col-md12 margin20"></div>
+					<c:forEach items="${cs}" var="c" varStatus="st"> 
 					<div class="layui-col-md12">
 						<div style="border-radius: 25px;" class="main list">
 							<div class="subject"><a href="detail?id=${c.id}">${c.title}</a><em>&nbsp&nbsp${c.date}发布</em></div>
@@ -122,13 +121,14 @@ if(current == pages){
 							</div>
 						</div>
 					</div>
+				<div class="layui-col-md12 margin20"></div>
 </c:forEach>
-										<div class="layui-col-md12 margin20 page">
+										<div class="layui-col-md12 page">
 			
-				<a class="prev" href="/ssm/search?current=1&content=${search}">&lt;&lt;</a> 
-				<a style="<%=display1%>" class="num" href="/ssm/search?current=<%=current-1%>&content=${search}"><%=current-1%></a> 
-			    <span class="current" style="background-color:#009688"><%=current%></span> 
-			    <a style="<%=display2%>" class="num" href="/ssm/search?current=<%=current+1%>&content=${search}"><%=current+1%></a> 
+				<a class="prev" href="/ssm/search?current=1&content=${search}">&lt;&lt;</a> &nbsp&nbsp
+				<a style="<%=display1%>" class="num" href="/ssm/search?current=<%=current-1%>&content=${search}"><%=current-1%></a> &nbsp&nbsp
+			    <span class="current" style="background-color:#009688"><%=current%></span> &nbsp&nbsp
+			    <a style="<%=display2%>" class="num" href="/ssm/search?current=<%=current+1%>&content=${search}"><%=current+1%></a> &nbsp&nbsp
 				<a class="next" href="/ssm/search?current=<%=pages%>&content=${search}">&gt;&gt;</a>
 		</div>
 		<div class="layui-col-md12 margin20"></div>

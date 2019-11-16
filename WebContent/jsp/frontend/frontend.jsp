@@ -13,7 +13,7 @@
 	String display2 = "";
 	if(username == null){
 		username = "请登录";
-		href = "/ssm";
+		href = "/ssm/login.jsp";
 		display="display:none";
 		}
 	else{
@@ -85,19 +85,8 @@
 					  		</div>
 						</div>
 					</div>
-
-				<div class="layui-col-md12 margin20"></div>
-					<div class="layui-col-md12">
-						<div style="border-radius: 25px;" class="main zdbox">
-							<div class="subject"><b>[置顶]</b><a href="">${c.title}</a><em>${c.date}发布</em></div>
-							<div class="content">
-							${c.content}
-							</div>
-						</div>
-					</div>
-					
-					<c:forEach items="${cs}" var="c" varStatus="st"> 
 					<div class="layui-col-md12 margin20"></div>
+					<c:forEach items="${cs}" var="c" varStatus="st"> 
 					<div class="layui-col-md12">
 						<div style="border-radius: 25px;" class="main list">
 			
@@ -130,14 +119,15 @@
 							</div>
 						</div>
 					</div>
+					<div class="layui-col-md12 margin20"></div>
 </c:forEach>
 					
-					<div class="layui-col-md12 margin20 page">
+					<div class="layui-col-md12 page">
 			
-				<a class="prev" href="/ssm/frontend?current=1">&lt;&lt;</a> 
-				<a style="<%=display1%>" class="num" href="/ssm/frontend?current=<%=current-1%>"><%=current-1%></a> 
-			    <span class="current" style="background-color:#009688"><%=current%></span> 
-			    <a style="<%=display2%>" class="num" href="/ssm/frontend?current=<%=current+1%>"><%=current+1%></a> 
+				<a class="prev" href="/ssm/frontend?current=1">&lt;&lt;</a> &nbsp&nbsp
+				<a style="<%=display1%>" class="num" href="/ssm/frontend?current=<%=current-1%>"><%=current-1%></a>  &nbsp&nbsp
+			    <span class="current" style="background-color:#009688"><%=current%></span>  &nbsp&nbsp
+			    <a style="<%=display2%>" class="num" href="/ssm/frontend?current=<%=current+1%>"><%=current+1%></a>  &nbsp&nbsp
 				<a class="next" href="/ssm/frontend?current=<%=pages%>">&gt;&gt;</a>
 		
 		</div>

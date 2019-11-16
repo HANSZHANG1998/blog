@@ -13,7 +13,7 @@ String cate = (String)request.getAttribute("category");
 if(cate.equals("0")){category = "分享";}else if(cate.equals("1")){category = "新闻";}else if(cate.equals("2")){category = "笔记";}else if(cate.equals("3")){category = "展示";}else if(cate.equals("4")){category = "大事件";}
 if(username == null){
 	username = "请登录";
-	href = "/ssm";
+	href = "/ssm/login.jsp";
 	display="display:none";
 	}
 else{
@@ -96,38 +96,25 @@ else{
 							 ${c.content}
 							</div>
 							<div class="copyright">
-								<p>转载声明：本站文章若无特别说明，皆为原创，转载请注明来源：TRY1T博客，谢谢！^^</p>
-							</div>
-							<div class="operation">
-								<a href="javascript:;" class="layui-btn layui-btn-normal">点赞</a>
+								<p>转载声明：本站文章若无特别说明，皆为转载</p>
 							</div>
 							<div class="Label">
 								<i class="layui-icon layui-icon-note"></i>
 							</div>
 						</div>
 						</c:forEach>
+						
+						
 					</div>
 					<div class="layui-col-md12 margin20"></div>
-					<div class="layui-col-md12">
-						<div style="border-radius: 25px;" class="layui-card">
-						  	<div class="layui-card-header">
-								<span>
-									相关推荐
-								</span>
-						  	</div>
-						  	<div class="layui-card-body">
-						  		<div class="layui-row">
-						  			<div class="layui-col-md4">
-										<div style="border-radius: 25px;" class="layui-card">
-										  	<a href="" class="layui-card-body recommend">
-										    	<p>用layui做一个独立博客网站（响应式模板）</p>
-										  	</a>
-										</div>
-					  				</div>
-						  		</div>
-						  	</div>
-						</div>
-					</div>
+					<div class="layui-col-md12"><div style="border-radius:25px" class="layui-card"><div class="layui-card-body title"><p>评论</p></div></div></div>
+					<div class="layui-col-md12 margin20"></div>
+					<div class="layui-col-md12"><div class="layui-card"><textarea id="demo" style="display: none;"></textarea></div></div>
+					<div class="layui-col-md12 margin20"></div>
+					<div style="width:100px;margin: 0 auto;" ><button style="  text-align: center;" class="layui-btn">发表评论</button></div>
+					
+					
+					<div class="layui-col-md12 margin20"></div>
 				</div>
 	        </div>
 
@@ -190,7 +177,7 @@ else{
 </body>
 <script src="lib/layui/layui.all.js"></script>
 <script> 
-layui.use([ 'form', 'layer' ], function() {
+layui.use([ 'layedit','form', 'layer' ], function() {
 	$ = layui.jquery;
 	var layer = layui.layer;
 	layui.carousel.render({
@@ -203,7 +190,10 @@ layui.use([ 'form', 'layer' ], function() {
 	    elem: 'pages' //注意，这里的 test1 是 ID，不用加 # 号
 	    ,count: 123 //数据总数，从服务端得到
   	});
-  	
+  	 var layedit = layui.layedit;
+  	layedit.build('demo', {
+  	  tool: ['strong','italic','underline','left', 'center', 'right','link','unlink', '|', 'face'],height: 150
+  	});      
   	$( "#logout" ).click(function() {
   	  layer.confirm("确定退出吗", {
 			    yes:function(){
