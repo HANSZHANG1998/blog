@@ -56,14 +56,6 @@ $(document).ready(function() {
 		});
 
 		$(function() {
-			$(document).keydown(function(event) {
-				if (event.keyCode == 13) {
-					$("#loginbutton").click();
-				}
-			});
-		})
-
-		$(function() {
 			$("#loginbutton").click(function() {
 				var rawdata = {
 					"username" : $("#username").val(),

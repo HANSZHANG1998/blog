@@ -13,10 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.how2java.mapper.BlogMapper;
 import com.how2java.pojo.Blog;
-import com.how2java.pojo.Tag;
+import com.how2java.pojo.Comment;
 import com.how2java.pojo.User;
 import com.how2java.service.BlogService;
-import com.how2java.service.TagService;
+import com.how2java.service.CommentService;
 import com.how2java.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,9 +38,9 @@ public class BlogController {
 	@Autowired
 	BlogService blogService;
 	@Autowired
-	TagService tagService;
-	@Autowired
 	UserService userService;
+	@Autowired
+	CommentService commentService;
 	
 	@RequestMapping("blog-add")
 	public void blogadd(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -81,12 +81,7 @@ public class BlogController {
 		blog.setViews(0);
 		blog.setCategory(category);
 		blog.setTop(top);
-		Tag tag = new Tag();
-		tag.setId1(id1);
-		tag.setId2(id2);
-		tag.setId3(id3);
-		tag.setUserid(id);
-		tagService.add(tag);
+		
 		// ∑µªÿjson÷µ
 		String json = "";
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -301,6 +296,7 @@ public class BlogController {
 		ModelAndView mav = new ModelAndView();
 		String id = request.getParameter("id");
 		List<Blog> cs = blogService.getById(id);
+		List<Comment> comment = commentService.list(id);
 		Blog blog = new Blog();
 		blog.setId(id);
 		String category = cs.get(0).getCategory();
@@ -309,6 +305,7 @@ public class BlogController {
 		blog.setViews(views);
 		blogService.updateViews(blog); 
 		mav.addObject("cs", cs);
+		mav.addObject("comment",comment);
 		List<User> cs2 = userService.list();
 		List<Blog> cs3 = blogService.list();
 		mav.addObject("articlecount", cs3.size());

@@ -74,6 +74,7 @@ else{
 						<div class="main">
 							<div class="title">
 								<p>${c.title}</p>
+								<input style="display:none" id="blogid" value="${c.id}">
 								<div class="layui-row stat">
 									<div class="layui-col-md3 layui-col-xs12">发布时间：<em>${c.date}</em></div>
 									<div class="layui-col-md2 layui-col-xs6">分类：<a><%=category%></a></div>
@@ -111,10 +112,21 @@ else{
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12"><div class="layui-card"><textarea id="demo" style="display: none;"></textarea></div></div>
 					<div class="layui-col-md12 margin20"></div>
-					<div style="width:100px;margin: 0 auto;" ><button style="  text-align: center;" class="layui-btn">发表评论</button></div>
+					<div style="width:100px;margin: 0 auto;" ><button id="submitbutton" class="layui-btn">发表评论</button></div>
 					
+		            <div class="layui-col-md12 margin20"></div>
+					<c:forEach items="${comment}" var="co" varStatus="st"> 
+					 <div class="layui-col-md12 margin10"></div>
+					 <div style="border-radius:25px" class="layui-col-md12  layui-card">
+					<div class="layui-card-header">
+					${co.username}&nbsp&nbsp&nbsp&nbsp&nbsp${co.date}
+					<span class="layui-breadcrumb" lay-separator="|"></span></div>
+					<div class="layui-card-body">
+					${co.content}
+					</div>
 					
-					<div class="layui-col-md12 margin20"></div>
+					</div>
+					</c:forEach>
 				</div>
 	        </div>
 
@@ -191,9 +203,41 @@ layui.use([ 'layedit','form', 'layer' ], function() {
 	    ,count: 123 //数据总数，从服务端得到
   	});
   	 var layedit = layui.layedit;
-  	layedit.build('demo', {
-  	  tool: ['strong','italic','underline','left', 'center', 'right','link','unlink', '|', 'face'],height: 150
+  	var editor = layedit.build('demo', {
+  	  tool: ['strong','italic','underline','link','unlink', '|', 'face'],height: 150
   	});      
+  	
+	$(function() {
+		$("#submitbutton").click(function() {
+		   
+			 var rawdata = {"content" : layedit.getContent(editor)};
+        	 var data = JSON.stringify(rawdata);
+        	
+				$.ajax({
+					type : "POST",
+					contentType:"application/x-www-form-urlencoded; charset=utf-8",
+					url : "/ssm/addcomment?blogid=" + encodeURI(encodeURI($("#blogid").val())),
+                    data : data,
+					dataType : "json",
+					success : function(data) {
+						var obj = JSON.parse(data);
+						if (obj.result == "success") {
+							layer.alert('评论成功！', {
+							    yes:function(){
+									window.location.reload();
+							    }
+							});
+						} else if (obj.result == "fail") {
+							layer.alert("评论失败")
+						}
+					},
+					error : function(e) {
+					layer.alert("评论失败-debug");
+					}
+				});
+	});
+	});
+  	
   	$( "#logout" ).click(function() {
   	  layer.confirm("确定退出吗", {
 			    yes:function(){
@@ -220,5 +264,7 @@ layui.use([ 'layedit','form', 'layer' ], function() {
 			});
   	  
   	});
+  	
+
 });</script>
 </html>

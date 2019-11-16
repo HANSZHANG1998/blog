@@ -85,8 +85,13 @@ $(document).ready(function() {
 						//layer.alert(data);
 						var obj = JSON.parse(data);
 						if (obj.result == "success") {
-							layer.alert("注册成功！请登录");
-							window.location.href = "/ssm/login.jsp";
+							layer.alert('注册成功！请登录', {
+							    yes:function(){
+							    	window.location.href = "/ssm/login.jsp";
+							    }
+							});
+                            
+							
 						} else if (obj.result == "fail1") {
 							layer.alert("已注册该用户，请登陆或重新注册");
 						} else if (obj.result == "nullusername") {
