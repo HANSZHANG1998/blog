@@ -39,4 +39,16 @@ public class UserServiceImpl implements UserService{
 		return userMapper.getByUsername(username);
 	}
 
+	public void updateurl(User user) {
+		userMapper.updateURL(user);		
+	}
+
+	public List<User> getUserByUsername(String username) {
+	     return userMapper.getUserByUsername(username);
+	}
+
+	public void updateDetail(User user) {
+		userMapper.updateDetail(user);
+	}
+
 }

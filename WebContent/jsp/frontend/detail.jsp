@@ -3,6 +3,12 @@
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 String username = (String)session.getAttribute("username");
+String url = (String)session.getAttribute("url");
+if(url == null){
+	url = "images/default.jpg";
+}else{
+	url = "images/avatar/" + url;
+}
 String fill = "";
 String href = "";
 String display = "";
@@ -18,7 +24,7 @@ if(username == null){
 	}
 else{
 	href="javascript:;";
-	fill = "<dl class='layui-nav-child'><dd><a href='account'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+	fill = "<dl class='layui-nav-child'><dd><a href='account'>个人中心</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
 }
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -46,9 +52,6 @@ else{
  			    	    <li style="margin-left:-20px" class="layui-nav-item">
 					    	<a href="frontend">BLOG</a>
 					  	</li>
-					  	<li style="<%=display%>"class="layui-nav-item layui-this">
-					    	<a href="userweb">个人主页</a>
-					  	</li>
 					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
 					  	<dl class="layui-nav-child">
 					  		<dd><a href="cate?category=0">分享</a></dd>
@@ -59,7 +62,7 @@ else{
 					  	</dl>
 					  	</li>
   <li style="float:right;margin-right:-20px" class="layui-nav-item">
-    <a href="<%=href%>"><img src="images/default.jpg" class="layui-nav-img"><%=username%></a>
+   <a href="<%=href%>"><img src="<%=url%>" class="layui-nav-img"><%=username%></a>
 <%=fill%>
   </li>
 </ul>
@@ -117,9 +120,12 @@ else{
 		            <div class="layui-col-md12 margin20"></div>
 					<c:forEach items="${comment}" var="co" varStatus="st"> 
 					 <div class="layui-col-md12 margin10"></div>
-					 <div style="border-radius:25px" class="layui-col-md12  layui-card">
+					 <div class="layui-col-md12  layui-card">
 					<div class="layui-card-header">
-					${co.username}&nbsp&nbsp&nbsp&nbsp&nbsp${co.date}
+					${co.username}&emsp;&emsp;&emsp;&emsp;&emsp;${co.date}
+					<div style="float:right; margin-right: 10px"class="alink">
+						<a onclick="comment_del('${co.id}')" style="${co.display}" class="layui-btn layui-btn-xs" >删除评论</a>
+					</div>
 					<span class="layui-breadcrumb" lay-separator="|"></span></div>
 					<div class="layui-card-body">
 					${co.content}
@@ -128,44 +134,13 @@ else{
 					</div>
 					</c:forEach>
 				</div>
+		
 	        </div>
 
 
 	        <div class="layui-col-md4">
 				<div class="layui-row">
-					<div class="layui-col-md12">
-						<div style="border-radius: 25px;" class="layui-card">
-						  	<div class="layui-card-header">
-								<span class="layui-breadcrumb" lay-separator="|">
-									<a href="javascript:;">站点统计</a>
-									<a href="javascript:;">联系站长</a>
-								</span>
-						  	</div>
-						  	<div class="layui-card-body" id="stat">
-						  		<table class="layui-table">
-								  	<colgroup>
-								    	<col width="120">
-								    	<col width="230">
-								  	</colgroup>
-								  	<tbody>
-								    	<tr>
-								      		<td>运行时间：</td>
-								      		<td>30 天</td>
-								    	</tr>
-								    	<tr>
-								      		<td>发表文章：</td>
-								      		<td>${articlecount} 篇</td>
-								    	</tr>
-								    	<tr>
-								      		<td>注册用户：</td>
-								      		<td>${usercount} 人</td>
-								    	</tr>
-								  	</tbody>
-								</table>
-						  	</div>		
-						</div>
-					</div>
-					<div class="layui-col-md12 margin20"></div>
+				
 					<div class="layui-col-md12">
 						<div style="border-radius: 25px;" class="layui-card">
 						  	<div class="layui-card-header">
@@ -176,12 +151,17 @@ else{
 						  	<div class="layui-card-body">
 								<table class="layui-table" lay-skin="nob">
 								  	<tbody>
-								    	<tr><td><a href="javascript:;">用layui做一个独立博客网站（响应式模板）</a></td></tr>
+								    	<tr><td><a href="http://www.try1t.com/ssm/detail?id=07600633-1ef0-4acb-a01f-429f183f6376">怎么看待甲骨文停止对于Java EE的开发？</a></td></tr>
+								    	<tr><td><a href="http://www.try1t.com/ssm/detail?id=1e330f23-33ba-4d72-8970-fa233379742c">EE半导体背景phd转行ML以及跳槽经历分享  </a></td></tr>
+								    	<tr><td><a href="http://www.try1t.com/ssm/detail?id=6b21c13e-d74b-4ae9-bd0d-faa77f859446">css居中问题 </a></td></tr>
+								    	<tr><td><a href="http://www.try1t.com/ssm/detail?id=9db15cc2-e21d-45eb-809f-36ec476d71f3">S9小组出局创最差成绩，RNG的实力是个谜</a></td></tr>
+								    	<tr><td><a href="http://www.try1t.com/ssm/detail?id=b6fc25d0-1d01-4337-955a-e2bc8773a257">脑门贴张纸，骗过最强人脸识别系统！</a></td></tr>
 								  	</tbody>
 								</table>
 						  	</div>
 						</div>
 					</div>
+					<div class="layui-col-md12 margin20">
 				</div>
 	        </div>
 		</div>
@@ -198,12 +178,8 @@ layui.use([ 'layedit','form', 'layer' ], function() {
 	    ,arrow: 'always' //始终显示箭头
 	    //,anim: 'updown' //切换动画方式
   	});
-  	layui.laypage.render({
-	    elem: 'pages' //注意，这里的 test1 是 ID，不用加 # 号
-	    ,count: 123 //数据总数，从服务端得到
-  	});
   	 var layedit = layui.layedit;
-  	var editor = layedit.build('demo', {
+  	 var editor  = layedit.build('demo', {
   	  tool: ['strong','italic','underline','link','unlink', '|', 'face'],height: 150
   	});      
   	
@@ -238,7 +214,9 @@ layui.use([ 'layedit','form', 'layer' ], function() {
 	});
 	});
   	
+  	
   	$( "#logout" ).click(function() {
+  	
   	  layer.confirm("确定退出吗", {
 			    yes:function(){
 					$.ajax({
@@ -264,7 +242,41 @@ layui.use([ 'layedit','form', 'layer' ], function() {
 			});
   	  
   	});
-  	
+ 
 
-});</script>
+});
+function comment_del(id) {
+		var cid = id;
+
+		layer.confirm('确认删除', {
+		    yes:function(){
+			$.ajax({
+				type : "POST",
+				contentType:"application/x-www-form-urlencoded; charset=utf-8",
+				url : "/ssm/delcomment?id=" + cid,
+                data : "",
+				dataType : "json",
+				success : function(data) {
+					var obj = JSON.parse(data);
+					if (obj.result == "success") {
+						layer.alert('删除成功！', {
+						    yes:function(){
+								window.location.reload();
+						    }
+						});
+					} else if (obj.result == "fail") {
+						layer.alert("删除失败")
+					}
+				},
+				error : function(e) {
+				layer.alert("删除失败-debug");
+				}
+			});
+		    }
+		    });
+}
+		
+</script>
+<script>	
+</script>
 </html>

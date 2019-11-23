@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
@@ -44,7 +45,7 @@ public class CommentController {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         if(username == null) {
-        	username = "游客";
+        	username = "Guest";
         }
 		String blogid = URLDecoder.decode(request.getParameter("blogid"),"UTF-8");
 		
@@ -79,5 +80,26 @@ public class CommentController {
 				out.write(json);
 			}
 }
-	
+	@RequestMapping("delcomment")
+	public void deletecomment(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String id = request.getParameter("id");
+		
+		// 返回json值
+				String json = "";
+				Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+				PrintWriter out = response.getWriter();
+				response.setCharacterEncoding("utf-8");
+				response.setContentType("application/json");
+				response.setStatus(HttpServletResponse.SC_OK);
+					try {
+						commentService.delete(id);
+						json = "{\"result\":\"success\"}";
+						json = gson.toJson(json);
+						out.write(json);
+					} catch (Exception e) {
+						json = "{\"result\":\"fail\"}";
+						json = gson.toJson(json);
+						out.write(json);
+					}
+	}
 }

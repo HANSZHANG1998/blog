@@ -13,18 +13,31 @@
 	    </delete>
 	    
 	    <select id="getById" parameterType="String" resultType="User">
-	        select * from  user  where id= #{id}    
+	        select * from  user  where id = #{id}    
 	    </select>
 	    
 	    <select id="getByUsername" parameterType="String" resultType="String">
-	        select password from  user  where username= #{username}    
+	        select password from  user  where username = #{username}    
 	    </select>
 
 	    <update id="update" parameterType="User" >
-	        update user set username=#{username},sex=#{sex},phone=#{phone},email=#{email},address=#{address},state=#{state},password=#{password} where id=#{id}    
+	        update user set username=#{username},sex=#{sex},phone=#{phone},email=#{email},address=#{address},state=#{state},password=#{password} where id = #{id}    
 	    </update>
+	    
+	    <update id="updateDetail" parameterType="User" >
+	        update user set sex=#{sex},phone=#{phone},email=#{email},address=#{address} where username = #{username}    
+	    </update>
+	    
+	    <update id="updateURL" parameterType="String" >
+	        update user set url=#{url} where username = #{username}
+	    </update>
+	    
 	    <select id="list" resultType="User">
 	        select * from user      
-	    </select>	    
+	    </select>	   
+	     
+	     <select id="getUserByUsername" parameterType="String" resultType="User">
+	        select * from user where username = #{username}    
+	    </select>	   
 	</mapper>
 

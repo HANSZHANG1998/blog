@@ -45,6 +45,7 @@ public class UserController {
 		HashMap<String, String> map = JSONObject.parseObject(readerStr, HashMap.class);
 		String username = (String) map.get("username");
 		String password = (String) map.get("password");
+		String url = userService.getUserByUsername(username).get(0).getUrl();
 		HttpSession session = request.getSession();
 
 		// ∑µªÿjson÷µ
@@ -66,6 +67,7 @@ public class UserController {
 				json = gson.toJson(json);
 				out.write(json);
 				session.setAttribute("username", username);
+				session.setAttribute("url", url);
 			} else {
 				json = "{\"result\":\"fail\"}";
 				json = gson.toJson(json);

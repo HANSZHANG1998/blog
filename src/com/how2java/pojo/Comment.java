@@ -7,6 +7,7 @@ public class Comment {
 	private String content;
 	private String username;
 	private String date;
+	private String display;
 	public String getId() {
 		return id;
 	}
@@ -36,6 +37,12 @@ public class Comment {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public String getDisplay() {
+		return display;
+	}
+	public void setDisplay(String display) {
+		this.display = display;
 	}
 	
 }

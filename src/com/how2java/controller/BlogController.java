@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.how2java.mapper.BlogMapper;
 import com.how2java.pojo.Blog;
 import com.how2java.pojo.Comment;
 import com.how2java.pojo.User;
@@ -57,9 +56,6 @@ public class BlogController {
 		String title = URLDecoder.decode(request.getParameter("title"),"UTF-8");
 		String subtitle = URLDecoder.decode(request.getParameter("subtitle"),"UTF-8");
 		String username = "admin";
-		String id1 = URLDecoder.decode(request.getParameter("id1"),"UTF-8");
-		String id2 = URLDecoder.decode(request.getParameter("id2"),"UTF-8");
-		String id3 = URLDecoder.decode(request.getParameter("id3"),"UTF-8");
 		String category = URLDecoder.decode(request.getParameter("category"),"UTF-8");
 		String top = URLDecoder.decode(request.getParameter("top"),"UTF-8");
 		
@@ -302,6 +298,15 @@ public class BlogController {
 		String id = request.getParameter("id");
 		List<Blog> cs = blogService.getById(id);
 		List<Comment> comment = commentService.list(id);
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		for(int i = 0; i < comment.size(); i++)
+		{
+			if(!comment.get(i).getUsername().equals(username)) {
+			comment.get(i).setDisplay("display:none");
+			}
+		}
 		Blog blog = new Blog();
 		blog.setId(id);
 		String category = cs.get(0).getCategory();
@@ -311,10 +316,6 @@ public class BlogController {
 		blogService.updateViews(blog); 
 		mav.addObject("cs", cs);
 		mav.addObject("comment",comment);
-		List<User> cs2 = userService.list();
-		List<Blog> cs3 = blogService.list();
-		mav.addObject("articlecount", cs3.size());
-		mav.addObject("usercount", cs2.size());
 		mav.addObject("title", cs.get(0).getTitle());
 		request.setAttribute("category", category);
 		mav.addObject("cono",comment.size());
@@ -399,17 +400,4 @@ public class BlogController {
 		return mav;
 	}
 	
-	//account
-		@RequestMapping("account")
-		public ModelAndView account(HttpServletRequest request, HttpServletResponse response) throws IOException {
-			ModelAndView mav = new ModelAndView();
-			
-			User user = new User();
-			HttpSession session = request.getSession();
-			String username = (String) session.getAttribute("username");
-			List<String>userlist = userService.getByUsername(username);
-			
-			mav.setViewName("frontend/account");
-			return mav;
-		}
 }

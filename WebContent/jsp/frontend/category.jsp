@@ -3,6 +3,12 @@
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 String username = (String)session.getAttribute("username");
+String url = (String)session.getAttribute("url");
+if(url == null){
+	url = "images/default.jpg";
+}else{
+	url = "images/avatar/" + url;
+}
 String curr = request.getAttribute("current").toString();
 int current = Integer.parseInt(curr);
 int pages = (int)request.getAttribute("pages");
@@ -21,7 +27,7 @@ if(username == null){
 	}
 else{
 	href="javascript:;";
-	fill = "<dl class='layui-nav-child'><dd><a href='account'>账号信息</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
+	fill = "<dl class='layui-nav-child'><dd><a href='account'>个人中心</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
 }
 if(current == 1){
 	display1 = "display:none";
@@ -56,9 +62,6 @@ if(current == pages){
  			    	    <li style="margin-left:-20px" class="layui-nav-item">
 					    	<a href="frontend">BLOG</a>
 					  	</li>
-					  	<li style="<%=display%>"class="layui-nav-item">
-					    	<a href="userweb">个人主页</a>
-					  	</li>
 					  	<li class="layui-nav-item layui-this"><a href="javascript:;">分类</a>
 					  	<dl class="layui-nav-child">
 					  		<dd><a href="cate?category=0">分享</a></dd>
@@ -69,7 +72,7 @@ if(current == pages){
 					  	</dl>
 					  	</li>
   <li style="float:right;margin-right:-20px" class="layui-nav-item">
-    <a href="<%=href%>"><img src="images/default.jpg" class="layui-nav-img"><%=username%></a>
+  <a href="<%=href%>"><img src="<%=url%>" class="layui-nav-img"><%=username%></a>
 <%=fill%>
   </li>
 </ul>

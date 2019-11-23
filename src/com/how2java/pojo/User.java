@@ -10,7 +10,7 @@ public class User {
 	private String date;
 	private String state;
 	private String password;
-	
+	private String url;
 
 	public String getId() {
 		return id;
@@ -102,11 +102,13 @@ public class User {
 	}
 
 
+	public String getUrl() {
+		return url;
+	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", sex=" + sex + ", phone=" + phone + ", email=" + email
-				+ ", address=" + address + ", date=" + date + ", state=" + state + ", password=" + password + "]";
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 	
