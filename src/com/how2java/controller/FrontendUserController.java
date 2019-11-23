@@ -35,6 +35,7 @@ public class FrontendUserController {
 		mav.setViewName("frontend/user/account");
 		return mav;
 	}
+	
 	@RequestMapping("frontend-user-edit")
 	public void frontendUserEdit(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String username = URLDecoder.decode(request.getParameter("username"),"UTF-8");
@@ -67,4 +68,40 @@ public class FrontendUserController {
 		
 	}
 	
+	 @RequestMapping("resetpassword")
+		public ModelAndView resetpassword(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		 ModelAndView mav = new ModelAndView();
+		 mav.setViewName("frontend/user/resetpass");
+         return mav;
+	 }
+    @RequestMapping("frontend-password-edit")
+	public void passwordedit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	String username = URLDecoder.decode(request.getParameter("username"),"UTF-8");
+    	String password = URLDecoder.decode(request.getParameter("password"),"UTF-8");
+    	String newpassword = URLDecoder.decode(request.getParameter("newpassword"),"UTF-8");
+    	String oldpass = userService.getByUsername(username).get(0);
+    	User user = new User();
+    	user.setUsername(username);
+    	user.setPassword(newpassword);
+    	String json = "";
+    	Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+		PrintWriter out = response.getWriter();
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+		response.setStatus(HttpServletResponse.SC_OK);
+    	if(oldpass.contentEquals(password)) {
+    		try {
+    		userService.updatePasswordByUsername(user);
+    		json = "{\"result\":\"success\"}";
+			json = gson.toJson(json);
+    	}catch(Exception e) {
+    		json = "{\"result\":\"fail\"}";
+			json = gson.toJson(json);
+    	}
+    	}else {
+    		json = "{\"result\":\"fail1\"}";
+    		json = gson.toJson(json);
+    	}
+    	out.write(json);
+	}
 }

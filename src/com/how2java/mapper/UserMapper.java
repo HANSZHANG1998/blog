@@ -17,7 +17,9 @@ public interface UserMapper {
     
     public int updateDetail(User user);
     
-    public int updateURL(User user);    
+    public int updateURL(User user);  
+    
+    public int updatePasswordByUsername(User user);  
     
     public List<User> list();
           

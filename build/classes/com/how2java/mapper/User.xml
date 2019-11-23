@@ -32,6 +32,10 @@
 	        update user set url=#{url} where username = #{username}
 	    </update>
 	    
+	    <update id="updatePasswordByUsername" parameterType="String" >
+	        update user set password=#{password} where username = #{username}
+	    </update>
+	    
 	    <select id="list" resultType="User">
 	        select * from user      
 	    </select>	   

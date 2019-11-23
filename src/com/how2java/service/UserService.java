@@ -10,6 +10,7 @@ public interface UserService {
 	public void update(User user);
 	public void updateDetail(User user);
 	public void updateurl(User user);
+	public void updatePasswordByUsername(User user);
 	public void delete(String id);
 	public List<User> getById(String id);
 	public List<String> getByUsername(String username);
