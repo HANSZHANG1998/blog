@@ -16,7 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.how2java.pojo.Blog;
 import com.how2java.pojo.User;
+import com.how2java.service.BlogService;
+import com.how2java.service.CommentService;
 import com.how2java.service.UserService;
 
 @Controller
@@ -24,7 +27,10 @@ public class FrontendUserController {
 
 	@Autowired
 	UserService userService;
-
+	@Autowired
+	BlogService blogService;
+	@Autowired
+	CommentService commentService;
 	@RequestMapping("account")
 	public ModelAndView account(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
@@ -104,4 +110,50 @@ public class FrontendUserController {
     	}
     	out.write(json);
 	}
+    
+	@RequestMapping("article")
+	public ModelAndView userweb(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession();
+		String username = (String)session.getAttribute("username");
+		ModelAndView mav = new ModelAndView();
+		String current  = (String) request.getParameter("current");
+		int currentpage = 0;
+		if(current == null) {
+			currentpage = 1;
+		}else {
+			currentpage = Integer.parseInt(current);
+		}
+		int pages;
+		List<Blog> cs = blogService.getBlogByUsername(username);
+		if(cs.isEmpty()) {
+			pages = 1;
+		}else {
+			if(cs.size()%10 != 0) {
+		pages = (cs.size()/10) + 1;
+		}else {
+			pages = cs.size()/10;
+		}
+		}
+		if(currentpage == pages){
+			cs = cs.subList((currentpage-1)*10, cs.size());
+		}else {
+			cs = cs.subList((currentpage-1)*10, currentpage*10-1);
+		}
+		for(int i = 0; i < cs.size(); i++) {
+			String id = cs.get(i).getId();
+			int commentno = commentService.list(id).size();
+			cs.get(i).setCounts(commentno);
+
+		}
+		
+		List<User> cs2 = userService.list();
+		mav.addObject("articlecount", cs.size());
+		mav.addObject("usercount", cs2.size());
+		mav.addObject("cs", cs);
+		mav.setViewName("frontend/user/article");
+		request.setAttribute("current", currentpage);
+		request.setAttribute("pages", pages);
+		return mav;
+	}
+	
 }

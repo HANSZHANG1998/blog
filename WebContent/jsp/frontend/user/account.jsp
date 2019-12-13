@@ -42,11 +42,13 @@ else{
 	<link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/detail.css">
+	<link rel="stylesheet" href="css/xadmin.css">
+	<link rel="icon" href="images/icon.jpg">
 </head>
 <body>
-<header class="layui-bg-cyan">
+<header style="background-color: #254b50;">
 		<nav class="layui-container">
-		<ul class="layui-nav layui-bg-cyan">
+		<ul style="background-color: transparent" class="layui-nav">
  			    	    <li style="margin-left:-20px" class="layui-nav-item">
 					    	<a href="frontend">BLOG</a>
 					  	</li>
@@ -60,8 +62,7 @@ else{
 					  	</dl>
 					  	</li>
   <li style="float:right;margin-right:-20px" class="layui-nav-item">
-     <a href="<%=href%>"><img src="<%=url%>" class="layui-nav-img"><%=username%></a>
-<%=fill%>
+     <a href="<%=href%>"><img src="<%=url%>" class="layui-nav-img"><%=username%></a><%=fill%>
   </li>
      </ul>
 		</nav>
@@ -71,7 +72,7 @@ else{
 			        <div class="layui-col-md3">
 				<div class="layui-row">
 					<div class="layui-col-md12">
-						<div style="border-radius: 25px; text-align:center" class="layui-card">
+						<div style="border-radius: 10px; text-align:center" class="layui-card">
 						  	<div class="layui-card-header">
 								<span class="layui-breadcrumb" lay-separator="|">
 									<a href="javascript:;">个人中心</a>
@@ -85,7 +86,7 @@ else{
 									<a href="/ssm/resetpassword">密码修改</a>
 								</div>
 						  		<div class="layui-breadcrumb">
-									<a href="javascript:;">文章管理</a>
+									<a href="/ssm/article">文章管理</a>
 								</div>
 								<p></p>
 								<div class="layui-breadcrumb">
@@ -95,25 +96,25 @@ else{
 						  	</div>
 						</div>
 					</div>
-					<div class="layui-col-md12 margin20"></div>
+					<div class="layui-col-md12 margin10"></div>
 					
 				</div>
 	        </div>
 		  
 			
 			<div class="layui-col-md9">
-			<div style="border-radius: 25px;" class="layui-col-md12 layui-card">
+			<div style="border-radius: 10px;" class="layui-col-md12 layui-card">
                      <div class="layui-row">
 				    <div class="margin20"></div>
 					<form class="layui-form">
 				
 			<div class="layui-form-item">
-				<label class="layui-form-label">头像</label>	
+				<label style="margin-left:5%" class="layui-form-label">头像</label>	
 				<img style="width:100px;height:100px;border:1px solid" src="<%=url%>">
 			</div>
 			
 		    <div class="layui-form-item">
-				<label class="layui-form-label"></label>
+				<label style="margin-left:5%" class="layui-form-label"></label>
 				<div class="layui-upload">
               <button style="width:100px" type="button" class="layui-btn" id="test1">更换头像</button>
                   <div class="layui-upload-list">
@@ -124,48 +125,49 @@ else{
 			</div>
 			<c:forEach items="${cs}" var="c" varStatus="st">	
 			<div class="layui-form-item">
-				<label class="layui-form-label">账号</label>
+				<label style="margin-left:5%" class="layui-form-label">账号</label>
 				<div class="layui-input-inline">
 					<input type="text" id="username" class="layui-input" readonly="true" value="${c.username}">
 				</div>
 			</div>
 
 			<div class="layui-form-item">
-				<label class="layui-form-label">性别</label>
+				<label style="margin-left:5%" class="layui-form-label">性别</label>
 				<div class="layui-input-inline">
 					<input type="text" id="sex" class="layui-input" value="${c.sex}">
 				</div>
 			</div>
 
 			<div class="layui-form-item">
-				<label class="layui-form-label">手机</label>
+				<label style="margin-left:5%" class="layui-form-label">手机</label>
 				<div class="layui-input-inline">
 					<input type="text" id="phone" class="layui-input" value="${c.phone}">
 				</div>
 			</div>
 
 			<div class="layui-form-item">
-				<label class="layui-form-label">邮箱</label>
+				<label style="margin-left:5%" class="layui-form-label">邮箱</label>
 				<div class="layui-input-inline">
 					<input type="text" id="email" class="layui-input" value="${c.email}">
 				</div>
 			</div>
 
 			<div class="layui-form-item">
-				<label class="layui-form-label">地址</label>
+				<label style="margin-left:5%" class="layui-form-label">地址</label>
 				<div class="layui-input-inline">
 					<input type="text" id="address" class="layui-input" value="${c.address}">
 				</div>
 			</div>
 			</c:forEach>
 		</form>
-		<div class="layui-form-item"><label class="layui-form-label"></label>
+		<div class="layui-form-item"><label style="margin-left:5%" class="layui-form-label"></label>
 		<button id="edit" class="layui-btn">修改</button>
 	    </div>
 		<div class="margin10"></div>
 					</div>
 			</div>
 	        </div>
+	        <div class="margin10"></div>
 		</div>
 	</div>
 </body>

@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TRY1T</title>
 <link rel="stylesheet" type="text/css" href="css/style2.css" tppabs="css/style2.css" />
+<link rel="icon" href="images/icon.jpg">
 <style>
 body{height:100%;background:#16a085;overflow:hidden;}
 canvas{z-index:-1;position:absolute;}

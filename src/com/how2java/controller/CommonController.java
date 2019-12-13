@@ -52,7 +52,7 @@ public class CommonController {
         String basePath = "C:\\Users\\Administrator\\Desktop\\blog\\WebContent\\images\\avatar\\"; //substituition
         String filepath = basePath + id + "." + prefix;
         String pathString = id + "." + prefix;
-	    //保存上传
+	    //淇濆瓨涓婁紶
 	     OutputStream out = null;
 	    InputStream fileInput=null;
 
@@ -60,7 +60,7 @@ public class CommonController {
 	        if(file!=null){
 	            filepath = filepath.replace("\\", "/");
 	            File files=new File(filepath);
-	            //打印查看上传路径
+	            //鎵撳嵃鏌ョ湅涓婁紶璺緞
 
 	            user.setUrl(pathString);
 	            System.out.println(filepath);
@@ -101,4 +101,11 @@ public class CommonController {
        out1.print("{\"code\":\"0\"}");
 	  
 	}
+	
+	
+ 
+    
+
+
+	
 }

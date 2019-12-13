@@ -54,11 +54,12 @@ if(current == pages){
     <link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/xadmin.css">
+	<link rel="icon" href="images/icon.jpg">
 </head>
 <body>
-	<header class="layui-bg-cyan">
+	<header style="background-color: #254b50;">
 		<nav class="layui-container">
-<ul class="layui-nav layui-bg-cyan">
+<ul style="background-color: transparent" class="layui-nav">
  			    	    <li style="margin-left:-20px" class="layui-nav-item">
 					    	<a href="frontend">BLOG</a>
 					  	</li>
@@ -83,7 +84,7 @@ if(current == pages){
 			<div class="layui-col-md8">
 				<div class="layui-row">
                     <div class="layui-col-md12">
-						<div style="border-radius: 25px;" class="layui-card">
+						<div style="border-radius: 10px;" class="layui-card">
 						  	<div class="layui-card-body" style="text-align: center;">
                              分类"<%=category%>"
 						  	</div>
@@ -93,7 +94,7 @@ if(current == pages){
 					<c:forEach items="${cs}" var="c" varStatus="st"> 
 					
 					<div class="layui-col-md12">
-						<div style="border-radius: 25px;" class="main list">
+						<div style="border-radius: 10px;" class="main list">
 							<div class="subject"><a href="detail?id=${c.id}">${c.title}</a><em>&nbsp&nbsp${c.date}发布</em></div>
 							<div class="content layui-row">
 								
@@ -138,7 +139,7 @@ if(current == pages){
 	        <div class="layui-col-md4">
 				<div class="layui-row">
 					<div class="layui-col-md12">
-						<div style="border-radius: 25px;" class="layui-card">
+						<div style="border-radius: 10px;" class="layui-card">
 						  	<div class="layui-card-header">
 								<span class="layui-breadcrumb" lay-separator="|">
 									<a href="javascript:;">站点详情</a>

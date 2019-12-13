@@ -42,11 +42,13 @@ else{
 	<link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
 	<link rel="stylesheet" href="css/detail.css">
+	<link rel="stylesheet" href="css/xadmin.css">
+	<link rel="icon" href="images/icon.jpg">
 </head>
 <body>
-<header class="layui-bg-cyan">
+<header style="background-color: #254b50;">
 		<nav class="layui-container">
-		<ul class="layui-nav layui-bg-cyan">
+		<ul style="background-color: transparent" class="layui-nav">
  			    	    <li style="margin-left:-20px" class="layui-nav-item">
 					    	<a href="frontend">BLOG</a>
 					  	</li>
@@ -59,9 +61,8 @@ else{
 					  	<dd><a href="cate?category=4">大事件</a></dd>
 					  	</dl>
 					  	</li>
-  <li style="float:right;margin-right:-20px" class="layui-nav-item">
-     <a href="<%=href%>"><img src="<%=url%>" class="layui-nav-img"><%=username%></a>
-<%=fill%>
+ <li style="float:right;margin-right:-20px" class="layui-nav-item">
+     <a href="<%=href%>"><img src="<%=url%>" class="layui-nav-img"><%=username%></a><%=fill%>
   </li>
      </ul>
 		</nav>
@@ -71,7 +72,7 @@ else{
 			        <div class="layui-col-md3">
 				<div class="layui-row">
 					<div class="layui-col-md12">
-						<div style="border-radius: 25px; text-align:center" class="layui-card">
+						<div style="border-radius: 10px; text-align:center" class="layui-card">
 						  	<div class="layui-card-header">
 								<span class="layui-breadcrumb" lay-separator="|">
 									<a href="javascript:;">个人中心</a>
@@ -85,7 +86,7 @@ else{
 									<a href="/ssm/resetpassword"><b style="color:black">密码修改</b></a>
 								</div>
 						  		<div class="layui-breadcrumb">
-									<a href="javascript:;">文章管理</a>
+									<a href="/ssm/article">文章管理</a>
 								</div>
 								<p></p>
 								<div class="layui-breadcrumb">
@@ -95,13 +96,13 @@ else{
 						  	</div>
 						</div>
 					</div>
-					<div class="layui-col-md12 margin20"></div>
+					<div class="layui-col-md12 margin10"></div>
 					
 				</div>
 	        </div>
 
 			<div class="layui-col-md9">
-			<div style="border-radius: 25px;" class="layui-col-md12 layui-card">
+			<div style="border-radius: 10px;" class="layui-col-md12 layui-card">
                      <div class="layui-row">
 				    <div class="margin20"></div>
 					<form class="layui-form">
