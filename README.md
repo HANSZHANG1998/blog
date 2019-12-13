@@ -1,1 +1,1 @@
-# blog
+LOVE PEACE AND FUCK YOU
