@@ -30,6 +30,7 @@ public class CommonController {
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		session.setAttribute("username", null);
+		session.setAttribute("url", null);
 		Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 		String json = "{\"result\":\"success\"}";
 		json = gson.toJson(json);

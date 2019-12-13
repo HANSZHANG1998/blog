@@ -110,21 +110,21 @@ else{
 			<div class="layui-form-item">
 				<label class="layui-form-label">老新密码</label>
 				<div class="layui-input-inline">
-					<input type="password" id="password" class="layui-input">
+					<input style="width:80%" type="password" id="password" class="layui-input">
 				</div>
 			</div>
 			
 			<div class="layui-form-item">
 				<label class="layui-form-label">新密码</label>
 				<div class="layui-input-inline">
-					<input type="password" id="newpassword" class="layui-input">
+					<input style="width:80%" type="password" id="newpassword" class="layui-input">
 				</div>
 			</div>
 
 			<div class="layui-form-item">
 				<label class="layui-form-label">重复密码</label>
 				<div class="layui-input-inline">
-					<input type="password" id="repass" class="layui-input">
+					<input style="width:80%" type="password" id="repass" class="layui-input">
 				</div>
 			</div>
 

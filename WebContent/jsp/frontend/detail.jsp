@@ -136,13 +136,12 @@
 					<div class="layui-col-md12">
 						<div style="border-radius: 10px" class="layui-card">
 							<div class="layui-card-body title">
-								<p>评论</p>
-							</div>
-							<div>
-							<div><button id="submitbutton" class="layui-btn">发表评论</button></div>
-							</div>
+								<p style="display:inline">评论</p>					
+							<button style="display:inline;float:right" id="submitbutton" class="layui-btn layui-btn-xs">发表评论</button>
+							</div>	
 						</div>
 					</div>
+					
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
 						<div class="layui-card">
@@ -217,6 +216,15 @@
 			</div>
 		</div>
 	</div>
+	<!-- 尾部 -->
+	<div class="footer"></div>
+	<footer style="background-color:#254b50">
+		<div class="layui-container">
+			<div class="layui-row">
+				<P>try1t.com All rights reserved</P>
+			</div>
+		</div>
+	</footer>
 </body>
 <script src="lib/layui/layui.all.js"></script>
 <script>

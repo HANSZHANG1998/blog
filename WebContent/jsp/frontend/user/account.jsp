@@ -134,28 +134,28 @@ else{
 			<div class="layui-form-item">
 				<label style="margin-left:5%" class="layui-form-label">性别</label>
 				<div class="layui-input-inline">
-					<input type="text" id="sex" class="layui-input" value="${c.sex}">
+					<input style="width:80%" type="text" id="sex" class="layui-input" value="${c.sex}">
 				</div>
 			</div>
 
 			<div class="layui-form-item">
 				<label style="margin-left:5%" class="layui-form-label">手机</label>
 				<div class="layui-input-inline">
-					<input type="text" id="phone" class="layui-input" value="${c.phone}">
+					<input style="width:80%" type="text" id="phone" class="layui-input" value="${c.phone}">
 				</div>
 			</div>
 
 			<div class="layui-form-item">
 				<label style="margin-left:5%" class="layui-form-label">邮箱</label>
 				<div class="layui-input-inline">
-					<input type="text" id="email" class="layui-input" value="${c.email}">
+					<input style="width:80%" type="text" id="email" class="layui-input" value="${c.email}">
 				</div>
 			</div>
 
 			<div class="layui-form-item">
 				<label style="margin-left:5%" class="layui-form-label">地址</label>
 				<div class="layui-input-inline">
-					<input type="text" id="address" class="layui-input" value="${c.address}">
+					<input style="width:80%" type="text" id="address" class="layui-input" value="${c.address}">
 				</div>
 			</div>
 			</c:forEach>

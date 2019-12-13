@@ -176,6 +176,15 @@ if(current == pages){
 	        </div>
 		</div>
 	</div>
+	<!-- 尾部 -->
+	<div class="footer"></div>
+	<footer style="background-color:#254b50">
+		<div class="layui-container">
+			<div class="layui-row">
+				<P>try1t.com All rights reserved</P>
+			</div>
+		</div>
+	</footer>
 </body>
 <script src="lib/layui/layui.all.js"></script>
 
