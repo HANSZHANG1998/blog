@@ -61,8 +61,8 @@
 	<header style="background-color: #254b50;">
 		<nav class="layui-container">
 			<ul style="background-color: transparent" class="layui-nav">
-				<li style="margin-left: -20px" class="layui-nav-item"><a
-					href="frontend">BLOG</a></li>
+				<li style="margin-left: -20px" class="layui-nav-item">	
+				<a href="frontend">TRY1T BLOG</a>
 				<li class="layui-nav-item"><a href="javascript:;">分类</a>
 					<dl class="layui-nav-child">
 						<dd>
@@ -149,8 +149,6 @@
 						</div>
 					</div>
 					<div class="layui-col-md12 margin20"></div>
-
-					<div class="layui-col-md12 margin20"></div>
 					<c:forEach items="${comment}" var="co" varStatus="st">
 						<div class="layui-col-md12 margin10"></div>
 						<div style="border-radius: 10px;"
@@ -164,7 +162,6 @@
 								<span class="layui-breadcrumb" lay-separator="|"></span>
 							</div>
 							<div class="layui-card-body">${co.content}</div>
-
 						</div>
 					</c:forEach>
 				</div>
@@ -174,7 +171,6 @@
 
 			<div class="layui-col-md4">
 				<div class="layui-row">
-
 					<div class="layui-col-md12">
 						<div style="border-radius: 10px;" class="layui-card">
 							<div class="layui-card-header">
@@ -211,7 +207,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="layui-col-md12 margin20"></div>
 				</div>
 			</div>
 		</div>

@@ -42,8 +42,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
@@ -96,10 +95,10 @@
 							id="carousel">
 							<div style="border-radius: 10px;" carousel-item>
 								<div>
-									<img src="images/1.jpg" alt="">
+									<img src="images/2.jpg" alt="">
 								</div>
 								<div>
-									<img src="images/2.jpg" alt="">
+									<img src="images/1.jpg" alt="">
 								</div>
 							</div>
 						</div>
@@ -225,7 +224,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="layui-col-md12 margin20"></div>
+					
 				</div>
 			</div>
 		</div>

@@ -50,7 +50,7 @@ else{
 		<nav class="layui-container">
 		<ul style="background-color: transparent" class="layui-nav">
  			    	    <li style="margin-left:-20px" class="layui-nav-item">
-					    	<a href="frontend">BLOG</a>
+					   	<a href="frontend">TRY1T BLOG</a>
 					  	</li>
 					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
 					  	<dl class="layui-nav-child">
@@ -127,7 +127,7 @@ else{
 			<div class="layui-form-item">
 				<label style="margin-left:5%" class="layui-form-label">账号</label>
 				<div class="layui-input-inline">
-					<input type="text" id="username" class="layui-input" readonly="true" value="${c.username}">
+					<input style="width:80%" type="text" id="username" class="layui-input" readonly="true" value="${c.username}">
 				</div>
 			</div>
 

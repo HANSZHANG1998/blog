@@ -61,8 +61,6 @@ public class CommonController {
 	        if(file!=null){
 	            filepath = filepath.replace("\\", "/");
 	            File files=new File(filepath);
-	            //打印查看上传路径
-
 	            user.setUrl(pathString);
 	            System.out.println(filepath);
 	            if(!files.getParentFile().exists()){

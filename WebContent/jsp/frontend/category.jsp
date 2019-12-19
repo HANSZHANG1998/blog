@@ -61,7 +61,7 @@ if(current == pages){
 		<nav class="layui-container">
 <ul style="background-color: transparent" class="layui-nav">
  			    	    <li style="margin-left:-20px" class="layui-nav-item">
-					    	<a href="frontend">BLOG</a>
+					    	<a href="frontend">TRY1T BLOG</a>
 					  	</li>
 					  	<li class="layui-nav-item layui-this"><a href="javascript:;">分类</a>
 					  	<dl class="layui-nav-child">
@@ -170,8 +170,6 @@ if(current == pages){
 						</div>
 					</div>
 					<div class="layui-col-md12 margin20"></div>
-					<div class="layui-col-md12">
-					</div>
 				</div>
 	        </div>
 		</div>
