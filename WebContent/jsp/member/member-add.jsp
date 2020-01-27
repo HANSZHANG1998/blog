@@ -120,7 +120,7 @@
 				var data = JSON.stringify(rawdata);
 				$.ajax({
 					type : "POST",
-					contentType : "application/json",
+					contentType:"application/x-www-form-urlencoded; charset=utf-8",
 					url : "/ssm/member-add",
 					data : data,
 					dataType : "json",

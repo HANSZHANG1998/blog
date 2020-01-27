@@ -79,23 +79,11 @@
                         </a>
                     </li >
                 </ul>
-                
-                                <ul class="sub-menu">
-                    <li>
-                        <a _href="jsp/blog/blog-add.jsp">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>标签管理</cite>
-                        </a>
-                    </li >
-                </ul>
             </li>            
-
 		  </ul>
       </div>
     </div>
     <!-- <div class="x-slide_left"></div> -->
-    <!-- å·¦ä¾§èåç»æ -->
-    <!-- å³ä¾§ä¸»ä½å¼å§ -->
     <div class="page-content">
         <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
           <ul class="layui-tab-title">

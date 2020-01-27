@@ -172,9 +172,20 @@ public class UserController {
 		mav.addObject("cs", newuser);
 		mav.setViewName("member/member-list");
 		mav.addObject("count", cs.size());
-		HttpSession session = request.getSession();
-		session.setAttribute("pagenum", current);
-		session.setAttribute("count", cs.size());
+		if(current == 1) {
+			mav.addObject("display", "display:none");
+		}else {
+			mav.addObject("display", "");
+		}
+		if(current == total) {
+			mav.addObject("display2", "display:none");
+		}else {
+			mav.addObject("display2", "");
+		}
+		mav.addObject("prev", current - 1);
+		mav.addObject("next", current + 1);
+		mav.addObject("pagenum", current);
+		mav.addObject("last", total);
 		return mav;
 	}
 

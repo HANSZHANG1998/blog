@@ -36,7 +36,9 @@ small,weak{color:#666}
 ::-webkit-input-placeholder {color:#999;line-height:inherit;} 
 :-moz-placeholder {color:#999;line-height:inherit;} 
 ::-moz-placeholder {color:#999;line-height:inherit;}
-
+.HandyEditor{
+	border: 1px;
+}
 /*other public*/
 .iconfont{font-family:'adminthemesregular';}
 .add_icon:before{content:"a";margin:0 5px;font-family:'adminthemesregular';}

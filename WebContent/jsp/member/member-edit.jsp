@@ -141,7 +141,7 @@ $(function() {
 			
 			$.ajax({
 				type : "POST",
-				contentType : "application/json",
+				contentType:"application/x-www-form-urlencoded; charset=utf-8",
 				url : "/ssm/member-edit",
 				data : data,
 				dataType : "json",

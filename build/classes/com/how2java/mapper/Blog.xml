@@ -25,7 +25,7 @@
 	    </select>
 	    
 	    <update id="update" parameterType="Blog" >
-	        update blog set title=#{title},subtitle=#{subtitle},category=#{category},top=#{top},content=#{content} where id=#{id}    
+	        update blog set title=#{title},subtitle=#{subtitle},category=#{category},content=#{content} where id=#{id}    
 	    </update>
 	    
 	    <select id="list" resultType="Blog">

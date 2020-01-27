@@ -49,23 +49,13 @@ if(current == pages){
 	<base href=" <%=basePath%>">
     <link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/xadmin.css">
 </head>
 <body>
 	<header class="layui-bg-cyan">
 		<nav class="layui-container">
 <ul style="background-color: transparent" class="layui-nav">
- 			    	    <li style="margin-left:-20px" class="layui-nav-item">
+ 			    	    <li style="margin-left:-20px" class="layui-nav-item layui-this">
 					    	<a href="frontend">BLOG</a>
-					  	</li>
-					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
-					  	<dl class="layui-nav-child">
-					  		<dd><a href="cate?category=0">分享</a></dd>
-					  	<dd><a href="cate?category=1">新闻</a></dd>
-					  	<dd><a href="cate?category=2">笔记</a></dd>
-					  	<dd><a href="cate?category=3">展示</a></dd>
-					  	<dd><a href="cate?category=4">大事件</a></dd>
-					  	</dl>
 					  	</li>
   <li style="float:right;margin-right:-20px" class="layui-nav-item">
      <a href="<%=href%>"><img src="<%=url%>" class="layui-nav-img"><%=username%></a>
@@ -74,6 +64,7 @@ if(current == pages){
 </ul>
 		</nav>
 	</header>
+	<div style="height:80px;"></div>
 	<div class="layui-container">
 		<div class="layui-row layui-col-space20">
 			<div class="layui-col-md8">

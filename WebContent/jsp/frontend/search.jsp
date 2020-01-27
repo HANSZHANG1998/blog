@@ -2,36 +2,7 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-String username = (String)session.getAttribute("username");
-String url = (String)session.getAttribute("url");
-if(url == null){
-	url = "images/default.jpg";
-}else{
-	url = "images/avatar/" + url;
-}
-String curr = request.getAttribute("current").toString();
-int current = Integer.parseInt(curr);
-int pages = (int)request.getAttribute("pages");
-String fill = "";
-String href = "";
-String display = "";
-String display1 = "";
-String display2 = "";
-if(username == null){
-	username = "请登录";
-	href = "/ssm/login.jsp";
-	display="display:none";
-	}
-else{
-	href="javascript:;";
-	fill = "<dl class='layui-nav-child'><dd><a href='account'>个人中心</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
-}
-if(current == 1){
-	display1 = "display:none";
-}
-if(current == pages){
-	display2 = "display:none";
-}
+
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -47,32 +18,22 @@ if(current == pages){
   	<meta name="format-detection" content="telephone=no">
     <title>TRY1T</title>
 	<base href=" <%=basePath%>">
-	<script src="js/jquery.session.js"></script>
     <link rel="stylesheet" href="lib/layui/css/layui.css">
 	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/xadmin.css">
 	<link rel="icon" href="images/icon.jpg">
 </head>
+<div style="height:80px;"></div>
 <body>
 	<header style="background-color: #254b50;">
 		<nav class="layui-container">
 <ul style="background-color: transparent" class="layui-nav">
- 			    	    <li style="margin-left:-20px" class="layui-nav-item">
+ 			    	    <li style="margin-left:-20px" class="layui-nav-item layui-this">
 					    <a href="frontend">TRY1T BLOG</a>
-					  	</li>
-					  	<li class="layui-nav-item"><a href="javascript:;">分类</a>
-					  	<dl class="layui-nav-child">
-					  	<dd><a href="cate?category=0">分享</a></dd>
-					  	<dd><a href="cate?category=1">新闻</a></dd>
-					  	<dd><a href="cate?category=2">笔记</a></dd>
-					  	<dd><a href="cate?category=3">展示</a></dd>
-					  	<dd><a href="cate?category=4">大事件</a></dd>
-					  	</dl>
-					  	</li>
-  <li style="float:right;margin-right:-20px" class="layui-nav-item">
-   <a href="<%=href%>"><img src="<%=url%>" class="layui-nav-img"><%=username%></a>
-<%=fill%>
-  </li>
+					  	</li>		  
+<li style="float: right; margin-right: -20px" class="layui-nav-item">
+					<a href="${href}"><img src="${url}" class="layui-nav-img">${username}</a>
+					${fill}
+				</li>
 </ul>
 		</nav>
 	</header>
@@ -104,8 +65,6 @@ if(current == pages){
 
 										<div class="layui-col-xs3 layui-col-md3 Label">
 											<i class="layui-icon layui-icon-note"></i>
-											<a href="javascript:;">PHP</a>
-											<a href="javascript:;">Discuz</a>
 										</div>
 
 										<div class="layui-col-xs3 layui-col-md3">
@@ -127,57 +86,56 @@ if(current == pages){
 					</div>
 				<div class="layui-col-md12 margin20"></div>
 </c:forEach>
-										<div class="layui-col-md12 page">
-			
-				<a class="prev" href="/ssm/search?current=1&content=${search}">&lt;&lt;</a> &nbsp&nbsp
-				<a style="<%=display1%>" class="num" href="/ssm/search?current=<%=current-1%>&content=${search}"><%=current-1%></a> &nbsp&nbsp
-			    <span class="current" style="background-color:#009688"><%=current%></span> &nbsp&nbsp
-			    <a style="<%=display2%>" class="num" href="/ssm/search?current=<%=current+1%>&content=${search}"><%=current+1%></a> &nbsp&nbsp
-				<a class="next" href="/ssm/search?current=<%=pages%>&content=${search}">&gt;&gt;</a>
+			<div class="page">
+			<div style="display:inline">
+				<a class="prev" href="search?pagenum=1">&lt;&lt;</a>&nbsp&nbsp
+				<div style="display:inline;${display1}"><a class="num" href="search?pagenum=${prev}">${prev}</a>&nbsp&nbsp</div>
+				<span class="current" style="background-color: #009688">${pagenum}</span>&nbsp&nbsp
+				<div style="display:inline;${display2}"><a class="num" href="search?pagenum=${next}">${next}</a>&nbsp&nbsp</div>
+				<a class="next" href="search?pagenum=${last}">&gt;&gt;</a>
+			</div>
 		</div>
 		<div class="layui-col-md12 margin20"></div>
 				</div>
 	        </div>
-	        <div class="layui-col-md4">
-				<div class="layui-row">
+			<div class="layui-col-md4">
+			    <div class="layui-row">
 					<div class="layui-col-md12">
-						<div style="border-radius: 10px;" class="layui-card">
-						  	<div class="layui-card-header">
-								<span class="layui-breadcrumb" lay-separator="|">
-									<a href="javascript:;">站点详情</a>
+						<div style="border-radius: 6px;" class="layui-card">
+							<div class="layui-card-header">
+								<span> 标签 </span>
+							</div>
+							<div class="layui-card-body">
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">1按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">2按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">3按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">迷你按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">4按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">5按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">迷你按钮</button>
+						        <button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">6按钮</button>
+							</div>
+							<div class="margin10"></div>
+						</div>
+					</div>
+					<div class="layui-col-md12 margin20"></div>
+					<div class="layui-col-md12">
+						<div style="border-radius: 6px;" class="layui-card">
+							<div class="layui-card-header">
+								<span class="layui-breadcrumb" lay-separator="|"> <a
+									href="javascript:;">站点详情</a>
 								</span>
-						  	</div>
-						  	<div class="layui-card-body" id="stat" >
-						  		<table class="layui-table">
-								  	<colgroup>
-								    	<col width="120">
-								    	<col width="230">
-								  	</colgroup>
-								  	<tbody>
-								    	<tr>
-								      		<td>运行时间：</td>
-								      		<td>30 天</td>
-								    	</tr>
-								    	<tr>
-								      		<td>发表文章：</td>
-								      		<td>${articlecount} 篇</td>
-								    	</tr>
-								    	<tr>
-								      		<td>注册用户：</td>
-								      		<td>${usercount} 人</td>
-								    	</tr>
-								  	</tbody>
-								</table>
-						  	</div>
+							</div>
 						</div>
 					</div>
 					<div class="layui-col-md12 margin20"></div>
 				</div>
-	        </div>
+			</div>
 		</div>
 	</div>
 	<!-- 尾部 -->
 	<div class="footer"></div>
+	<div style="height:80px;"></div>
 	<footer style="background-color:#254b50">
 		<div class="layui-container">
 			<div class="layui-row">

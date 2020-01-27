@@ -1,22 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*"%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-	int pagenum;
-	if (session.getAttribute("pagenum") == null) {
-		pagenum = 1;
-	} else {
-		pagenum = Integer.parseInt(session.getAttribute("pagenum").toString());
-	}
-	int count = Integer.parseInt(session.getAttribute("count").toString());
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>欢迎页面</title>
@@ -113,24 +103,13 @@
 			</tbody>
 		</table>
 		<div class="page">
-			<div>
-				<a class="prev" href="member-list?pagenum=1">&lt;&lt;</a> 
-				<a class="num" style="<%if (pagenum == 1) {
-				out.print("display:none");
-			}%>" href="member-list?pagenum=<%=pagenum - 1%>"><%=pagenum - 1%></a> 
-			    <span class="current" style="background-color:#009688"><%=pagenum%></span> 
-			    <a class="num" 
-			style="<%int num = count / 10;
-			if (num * 10 != count) {
-				num = num + 1;
-			}
-			if (pagenum == num) {
-				out.print("display:none");
-			}%>" href="member-list?pagenum=<%=pagenum + 1%>"><%=pagenum + 1%></a> 
-				<a class="next" href="member-list?pagenum=<%=num%>">&gt;&gt;</a>
+		<div style="display:inline">
+				<a class="prev" href="member-list?pagenum=1">&lt;&lt;</a>&nbsp&nbsp
+				<div style="display:inline;${display};"><a class="num" href="member-list?pagenum=${prev}">${prev}</a>&nbsp&nbsp</div>
+				<span class="current" style="background-color: #009688">${pagenum}</span>&nbsp&nbsp
+				<div style="display:inline;${display2};"><a class="num" href="member-list?pagenum=${next}">${next}</a>&nbsp&nbsp</div>
+				<a class="next" href="member-list?pagenum=${last}">&gt;&gt;</a>
 			</div>
-		</div>
-
 	</div>
 	<script>
 		layui.use('laydate', function() {

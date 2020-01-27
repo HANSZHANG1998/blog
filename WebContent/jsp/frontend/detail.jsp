@@ -3,39 +3,6 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-	String username = (String) session.getAttribute("username");
-	String url = (String) session.getAttribute("url");
-	if (url == null) {
-		url = "images/default.jpg";
-	} else {
-		url = "images/avatar/" + url;
-	}
-	String fill = "";
-	String href = "";
-	String display = "";
-	String display1 = "";
-	String display2 = "";
-	String category = "";
-	String cate = (String) request.getAttribute("category");
-	if (cate.equals("0")) {
-		category = "分享";
-	} else if (cate.equals("1")) {
-		category = "新闻";
-	} else if (cate.equals("2")) {
-		category = "笔记";
-	} else if (cate.equals("3")) {
-		category = "展示";
-	} else if (cate.equals("4")) {
-		category = "大事件";
-	}
-	if (username == null) {
-		username = "请登录";
-		href = "/ssm/login.jsp";
-		display = "display:none";
-	} else {
-		href = "javascript:;";
-		fill = "<dl class='layui-nav-child'><dd><a href='account'>个人中心</a></dd><dd><a id='logout' href='javascript:;'>退出</a></dd></dl>";
-	}
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -61,33 +28,17 @@
 	<header style="background-color: #254b50;">
 		<nav class="layui-container">
 			<ul style="background-color: transparent" class="layui-nav">
-				<li style="margin-left: -20px" class="layui-nav-item">	
-				<a href="frontend">TRY1T BLOG</a>
-				<li class="layui-nav-item"><a href="javascript:;">分类</a>
-					<dl class="layui-nav-child">
-						<dd>
-							<a href="cate?category=0">分享</a>
-						</dd>
-						<dd>
-							<a href="cate?category=1">新闻</a>
-						</dd>
-						<dd>
-							<a href="cate?category=2">笔记</a>
-						</dd>
-						<dd>
-							<a href="cate?category=3">展示</a>
-						</dd>
-						<dd>
-							<a href="cate?category=4">大事件</a>
-						</dd>
-					</dl></li>
+				<li style="margin-left: -20px" class="layui-nav-item layui-this">
+					<a href="frontend">TRY1T BLOG</a>
+				</li>
 				<li style="float: right; margin-right: -20px" class="layui-nav-item">
-					<a href="<%=href%>"><img src="<%=url%>" class="layui-nav-img"><%=username%></a>
-					<%=fill%>
+					<a href="${href}"><img src="${url}" class="layui-nav-img">${username}</a>
+					${fill}
 				</li>
 			</ul>
 		</nav>
 	</header>
+	<div style="height:80px;"></div>
 	<div class="layui-container">
 		<div class="layui-row layui-col-space20">
 			<div class="layui-col-md8">
@@ -103,7 +54,7 @@
 											发布时间：<em>${c.date}</em>
 										</div>
 										<div class="layui-col-md2 layui-col-xs6">
-											分类：<a><%=category%></a>
+											分类：<a>${category}</a>
 										</div>
 										<div class="layui-col-md2 layui-col-xs6">
 											作者：<a>${c.username}</a>
@@ -134,7 +85,7 @@
 					</div>
 					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div style="border-radius: 10px" class="layui-card">
+						<div style="border-radius: 6px" class="layui-card">
 							<div class="layui-card-body title">
 								<p style="display:inline">评论</p>					
 							<button style="display:inline;float:right" id="submitbutton" class="layui-btn layui-btn-xs">发表评论</button>
@@ -151,7 +102,7 @@
 					<div class="layui-col-md12 margin20"></div>
 					<c:forEach items="${comment}" var="co" varStatus="st">
 						<div class="layui-col-md12 margin10"></div>
-						<div style="border-radius: 10px;"
+						<div style="border-radius: 6px;"
 							class="layui-col-md12  layui-card">
 							<div class="layui-card-header">
 								${co.username}&emsp;&emsp;&emsp;&emsp;&emsp;${co.date}
@@ -171,8 +122,44 @@
 
 			<div class="layui-col-md4">
 				<div class="layui-row">
+							    <div class="layui-col-md12">
+						<div style="border-radius: 6px;" class="layui-card">
+							<div class="layui-card-header">
+								<span> 搜索 </span>
+							</div>
+							<div class="layui-card-body" style="text-align: center;">
+								<input style="width: 75%; display: inline" type="text"
+									id="search" placeholder="请输入查询内容"
+									autocomplete="off" class="layui-input">&nbsp
+								<button style="display: inline; margin-top: -4px"
+									class="layui-btn" id="searchBtn">搜索</button>
+							</div>
+							<div class="margin10"></div>
+						</div>
+					</div>
+					
+					<div class="layui-col-md12 margin20"></div>
 					<div class="layui-col-md12">
-						<div style="border-radius: 10px;" class="layui-card">
+						<div style="border-radius: 6px;" class="layui-card">
+							<div class="layui-card-header">
+								<span> 标签 </span>
+							</div>
+							<div class="layui-card-body">
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">1按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">2按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">3按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">迷你按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">4按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">5按钮</button>
+								<button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">迷你按钮</button>
+						        <button style="margin:5px" type="button" class="layui-btn layui-btn-xs ">6按钮</button>
+							</div>
+							<div class="margin10"></div>
+						</div>
+					</div>
+					<div class="layui-col-md12 margin20"></div>
+					<div class="layui-col-md12">
+						<div style="border-radius: 6px;" class="layui-card">
 							<div class="layui-card-header">
 								<span> 热门文章 </span>
 							</div>
@@ -213,6 +200,7 @@
 	</div>
 	<!-- 尾部 -->
 	<div class="footer"></div>
+	<div style="height:80px;"></div>
 	<footer style="background-color:#254b50">
 		<div class="layui-container">
 			<div class="layui-row">

@@ -23,8 +23,6 @@
 	<form style="margin-right: 50px" class="layui-form">
 		<br>
 		<input id="id" value="${c.id}" style="display:none">
-		<input id="cate" value="${c.category}" style="display:none">
-		<input id="top" value="${c.top}" style="display:none">
 		<div class="layui-form-item">
 			<label class="layui-form-label">标题</label>
 			<div class="layui-input-block">
@@ -40,32 +38,11 @@
 					autocomplete="off" class="layui-input max_width500">
 			</div>
 		</div>
-
 		<div class="layui-form-item">
-			<label class="layui-form-label">分类</label>
+			<label class="layui-form-label">标签</label>
 			<div class="layui-input-block">
-				<select id="category" name="category">
-					<option value="" class="max_width500"></option>
-					<option value="0" class="max_width500">分享</option>
-					<option value="1" class="max_width500">新闻</option>
-					<option value="2" class="max_width500">笔记</option>
-					<option value="3" class="max_width500">展示</option>
-					<option value="4" class="max_width500">大事件</option>
-				</select>
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">标签选择</label>
-			<div class="layui-input-block">
-				<input type="checkbox" id="id1" title="技术分享"> 
-				<input type="checkbox" id="id2" title="心情随笔"> 
-				<input type="checkbox" id="id3" title="问题解答">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">置顶</label>
-			<div class="layui-input-block">
-				<input id="top" type="checkbox" lay-filter="conf" lay-skin="switch" >
+				<input value="${c.category}" type="text" id="tag" required placeholder="请输入标签"
+					autocomplete="off" class="layui-input max_width500">
 			</div>
 		</div>
 		<div class="layui-form-item layui-form-text">
@@ -95,14 +72,9 @@ $(function() {
 				$.ajax({
 					type : "POST",
 					contentType:"application/x-www-form-urlencoded; charset=utf-8",
-					url : "/ssm/blog-edit?title=" + encodeURI(encodeURI($("#title").val()))
+					url : "/ssm/blog-edit?title=" + + encodeURI(encodeURI($("#title").val()))
 					+"&subtitle=" + encodeURI(encodeURI($("#subtitle").val()))
-					+"&category=" + encodeURI(encodeURI($("#category").val()))
-					+"&id=" + encodeURI(encodeURI($("#id").val()))
-					+"&id1=" + encodeURI(encodeURI($("#id1").val()))
-					+"&id2=" + encodeURI(encodeURI($("#id2").val()))
-					+"&id3=" + encodeURI(encodeURI($("#id3").val()))
-					+"&top=" + encodeURI(encodeURI($("#top").val())),
+					+"&tag=" + encodeURI(encodeURI($("#tag").val())) + "&id=" + encodeURI(encodeURI($("#id").val())),
                     data : data,
 					dataType : "json",
 					success : function(data) {

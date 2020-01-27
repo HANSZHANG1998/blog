@@ -56,8 +56,7 @@ public class BlogController {
 		String title = URLDecoder.decode(request.getParameter("title"),"UTF-8");
 		String subtitle = URLDecoder.decode(request.getParameter("subtitle"),"UTF-8");
 		String username = "admin";
-		String category = URLDecoder.decode(request.getParameter("category"),"UTF-8");
-		String top = URLDecoder.decode(request.getParameter("top"),"UTF-8");
+		String tag = URLDecoder.decode(request.getParameter("tag"),"UTF-8");
 		
 		// 处理数据
 		UUID uuid = UUID.randomUUID();
@@ -75,8 +74,8 @@ public class BlogController {
 		blog.setDate(date);
 		blog.setContent(content);
 		blog.setViews(0);
-		blog.setCategory(category);
-		blog.setTop(top);
+		blog.setCategory(tag);
+
 		
 		// 返回json值
 		String json = "";
@@ -120,10 +119,20 @@ public class BlogController {
 		}
 		mav.addObject("cs", newblog);
 		mav.setViewName("blog/blog-list");
-		mav.addObject("count", cs.size());
-		HttpSession session = request.getSession();
-		session.setAttribute("pagenum", current);
-		session.setAttribute("count", cs.size());
+		if(current == 1) {
+			mav.addObject("display", "display:none");
+		}else {
+			mav.addObject("display", "");
+		}
+		if(current == total) {
+			mav.addObject("display2", "display:none");
+		}else {
+			mav.addObject("display2", "");
+		}
+		mav.addObject("prev", current - 1);
+		mav.addObject("next", current + 1);
+		mav.addObject("pagenum", current);
+		mav.addObject("last", total);
 		return mav;
 	}
 	
@@ -175,9 +184,8 @@ public class BlogController {
 		String content = (String) map.get("content");
 		String title = URLDecoder.decode(request.getParameter("title"),"UTF-8");
 		String subtitle = URLDecoder.decode(request.getParameter("subtitle"),"UTF-8");
+		String tag = URLDecoder.decode(request.getParameter("tag"),"UTF-8");
 		String id = URLDecoder.decode(request.getParameter("id"),"UTF-8");
-		String top = URLDecoder.decode(request.getParameter("top"),"UTF-8");
-		String category = URLDecoder.decode(request.getParameter("category"),"UTF-8");
 		
 		
 		// 处理数据
@@ -187,8 +195,7 @@ public class BlogController {
 		blog.setSubtitle(subtitle);
 		blog.setUsername("admin");
 		blog.setArticle("article");
-		blog.setCategory(category);
-		blog.setTop(top);
+		blog.setCategory(tag);
 		blog.setState("publish");
 		blog.setContent(content);
 
@@ -213,172 +220,6 @@ public class BlogController {
 		
 	}
 	
-	@RequestMapping("frontend")
-	public ModelAndView frontend(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ModelAndView mav = new ModelAndView();
-		String current  = (String) request.getParameter("current");
-		int currentpage = 0;
-		if(current == null) {
-			currentpage = 1;
-		}else {
-			currentpage = Integer.parseInt(current);
-		}
-		int pages;
-		List<Blog> cs = blogService.list();
-		if(cs.isEmpty()) {
-			pages = 1;
-		}else {
-			if(cs.size()%10 != 0) {
-		pages = (cs.size()/10) + 1;
-		}else {
-			pages = cs.size()/10;
-		}
-		}
-		if(currentpage == pages){
-			cs = cs.subList((currentpage-1)*10, cs.size());
-		}else {
-			cs = cs.subList((currentpage-1)*10, currentpage*10-1);
-		}
-		List<User> cs2 = userService.list();
-		for(int i = 0; i < cs.size(); i++) {
-		String id = cs.get(i).getId();
-		CommonMethods methods = new CommonMethods();
-		String temp;
-		temp = cs.get(i).getContent();
-		temp = methods.removeHtmlTag(temp);
-		cs.get(i).setContent(temp);
-		int commentno = commentService.list(id).size();
-		cs.get(i).setCounts(commentno);
-		}
-		mav.addObject("articlecount", cs.size());
-		mav.addObject("usercount", cs2.size());
-		mav.addObject("cs", cs);
-		mav.setViewName("frontend/frontend");
-		request.setAttribute("current", currentpage);
-		request.setAttribute("pages", pages);
-		return mav;
-	}
-	
-	@RequestMapping("detail")
-	public ModelAndView detail(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		String id = request.getParameter("id");
-		List<Blog> cs = blogService.getById(id);
-		List<Comment> comment = commentService.list(id);
-		
-		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
-		for(int i = 0; i < comment.size(); i++)
-		{
-			if(!comment.get(i).getUsername().equals(username)) {
-			comment.get(i).setDisplay("display:none");
-			}
-		}
-		Blog blog = new Blog();
-		blog.setId(id);
-		String category = cs.get(0).getCategory();
-		int views = cs.get(0).getViews();
-		views++;
-		blog.setViews(views);
-		blogService.updateViews(blog); 
-		mav.addObject("cs", cs);
-		mav.addObject("comment",comment);
-		mav.addObject("title", cs.get(0).getTitle());
-		request.setAttribute("category", category);
-		mav.addObject("cono",comment.size());
-		mav.setViewName("frontend/detail");
-		return mav;
-	}
-	
-	@RequestMapping("search")
-	public ModelAndView search(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ModelAndView mav = new ModelAndView();
-		String current  = (String) request.getParameter("current");
-		String content  = (String) request.getParameter("content");
-		int currentpage = 0;
-		if(current == null) {
-			currentpage = 1;
-		}else {
-			currentpage = Integer.parseInt(current);
-		}
-		int pages;
-		List<Blog> cs = blogService.searchlike(content);
-		if(cs.isEmpty()) {
-			pages = 1;
-		}else {
-			if(cs.size()%10 != 0) {
-		pages = (cs.size()/10) + 1;
-		}else {
-			pages = cs.size()/10;
-		}
-		}
-		if(currentpage == pages){
-			cs = cs.subList((currentpage-1)*10, cs.size());
-		}else {
-			cs = cs.subList((currentpage-1)*10, currentpage*10-1);
-		}
-		for(int i = 0; i < cs.size(); i++) {
-		CommonMethods methods = new CommonMethods();
-		String temp;
-		temp = cs.get(i).getContent();
-		temp = methods.removeHtmlTag(temp);
-		cs.get(i).setContent(temp);
-		}
-		List<User> cs2 = userService.list();
-		mav.addObject("articlecount", cs.size());
-		mav.addObject("usercount", cs2.size());
-		mav.addObject("search", content);
-		mav.addObject("cs", cs);
-		mav.setViewName("frontend/search");
-		request.setAttribute("current", currentpage);
-		request.setAttribute("pages", pages);
-		return mav;
-	}
-	
-	//category
-	@RequestMapping("cate")
-	public ModelAndView cate(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		ModelAndView mav = new ModelAndView();
-		String current  = (String) request.getParameter("current");
-		String category  = (String) request.getParameter("category");
-		int currentpage = 0;
-		if(current == null) {
-			currentpage = 1;
-		}else {
-			currentpage = Integer.parseInt(current);
-		}
-		int pages;
-		List<Blog> cs = blogService.getBlogByCategory(category);
-		if(cs.isEmpty()) {
-			pages = 1;
-		}else {
-			if(cs.size()%10 != 0) {
-		pages = (cs.size()/10) + 1;
-		}else {
-			pages = cs.size()/10;
-		}
-		}
-		if(currentpage == pages){
-			cs = cs.subList((currentpage-1)*10, cs.size());
-		}else {
-			cs = cs.subList((currentpage-1)*10, currentpage*10-1);
-		}
-		for(int i = 0; i < cs.size(); i++) {
-		CommonMethods methods = new CommonMethods();
-		String temp;
-		temp = cs.get(i).getContent();
-		temp = methods.removeHtmlTag(temp);
-		cs.get(i).setContent(temp);
-		}
-		List<User> cs2 = userService.list();
-		mav.addObject("articlecount", cs.size());
-		mav.addObject("usercount", cs2.size());
-		request.setAttribute("category", category);
-		mav.addObject("cs", cs);
-		mav.setViewName("frontend/category");
-		request.setAttribute("current", currentpage);
-		request.setAttribute("pages", pages);
-		return mav;
-	}
+
 	
 }

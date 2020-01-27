@@ -80,6 +80,7 @@ public class FrontendUserController {
 		 mav.setViewName("frontend/user/resetpass");
          return mav;
 	 }
+	 
     @RequestMapping("frontend-password-edit")
 	public void passwordedit(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	String username = URLDecoder.decode(request.getParameter("username"),"UTF-8");
