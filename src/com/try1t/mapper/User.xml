@@ -3,7 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<mapper namespace="com.how2java.mapper.UserMapper">
+	<mapper namespace="com.try1t.mapper.UserMapper">
 	    <insert id="add" parameterType="User" >
 	        insert into user (id,username,sex,phone,email,address,date,state,password ) values (#{id},#{username},#{sex},#{phone},#{email},#{address},#{date},#{state},#{password})    
 	    </insert>

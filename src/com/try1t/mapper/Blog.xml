@@ -3,7 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<mapper namespace="com.how2java.mapper.BlogMapper">
+	<mapper namespace="com.try1t.mapper.BlogMapper">
 	    <insert id="add" parameterType="Blog" >
 	        insert into blog (id,title,subtitle,username,article,state,category,top,views,date,content) values (#{id},#{title},#{subtitle},#{username},#{article},#{state},#{category},#{top},#{views},#{date},#{content})    
 	    </insert>
