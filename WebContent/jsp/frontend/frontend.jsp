@@ -38,7 +38,7 @@
 	</header>
 	<div style="height:80px;"></div>
 	<div  class="layui-container">
-		<div  class="layui-row layui-col-space20">
+		<div class="layui-row layui-col-space20">
 			<div style="margin-top:-20px" class="layui-col-md8">
 				<div class="layui-row">
 					<div class="layui-col-md12">
@@ -103,10 +103,10 @@
         <div class="layui-col-md12 margin20"></div>
 				</div>
 			</div>
-			<div  class="layui-col-md4">
-			    <div class="layui-row">
-			    <div class="layui-col-md12">
-						<div style="border-radius: 6px;" class="layui-card">
+			<div class="layui-col-md4">
+			    <div id="rightcard" class="layui-row">
+			    <div  class="layui-col-md12">
+						<div class="layui-card" style="border-radius: 6px;" id="rightcard">
 							<div class="layui-card-header">
 								<span> 搜索 </span>
 							</div>

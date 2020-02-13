@@ -9,7 +9,12 @@ header{margin-bottom: 20px;height: 60px;
     height: 60px;
     display:block;
 }
-
+#rightcard{
+	 z-index: 10000;
+	position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 60px;
+}
 .layui-nav-child dd{text-align: center;}
 /*header styles*/
 .logo{padding-top: 9px;}

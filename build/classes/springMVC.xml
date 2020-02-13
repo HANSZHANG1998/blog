@@ -18,7 +18,7 @@
 	<context:annotation-config />
 
 	<context:component-scan
-		base-package="com.how2java.controller">
+		base-package="com.try1t.controller">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>

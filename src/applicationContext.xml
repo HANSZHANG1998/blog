@@ -14,7 +14,7 @@
 	
 	<context:property-placeholder location="classpath:jdbc.properties" />
     <context:annotation-config />
-	<context:component-scan base-package="com.how2java.service" />
+	<context:component-scan base-package="com.try1t.service" />
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
 	  <property name="driverClassName">  
 	      <value>${jdbc.driver}</value>  
@@ -33,13 +33,13 @@
 	
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="typeAliasesPackage" value="com.how2java.pojo" />
+		<property name="typeAliasesPackage" value="com.try1t.pojo" />
 		<property name="dataSource" ref="dataSource"/>
-		<property name="mapperLocations" value="classpath:com/how2java/mapper/*.xml"/>
+		<property name="mapperLocations" value="classpath:com/try1t/mapper/*.xml"/>
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.how2java.mapper"/>
+		<property name="basePackage" value="com.try1t.mapper"/>
 	</bean>
 	
 
